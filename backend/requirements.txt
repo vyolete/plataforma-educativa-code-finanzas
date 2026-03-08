@@ -16,16 +16,24 @@ python-dotenv==1.0.0
 # Email
 resend==0.7.0
 
+# File storage
+cloudinary==1.36.0
+
 # Financial data
 yfinance==0.2.35
+
+# GitHub API
+PyGithub==2.1.1
+httpx==0.26.0
+
+# Encryption for tokens
+cryptography==41.0.7
 
 # Validation
 pydantic==2.5.3
 pydantic-settings==2.1.0
 email-validator==2.1.0
 
-# CORS
-python-cors==1.0.0
 
 # Testing
 pytest==7.4.4

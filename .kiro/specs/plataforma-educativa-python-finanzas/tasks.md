@@ -19,7 +19,7 @@ El plan sigue un enfoque de entrega incremental en 4 fases, comenzando con el MV
 
 ### Fase 1: MVP - Infraestructura y Módulos 1-3
 
-- [ ] 1. Configuración inicial del proyecto
+- [x] 1. Configuración inicial del proyecto
   - [x] 1.1 Crear estructura del proyecto Next.js con TypeScript
     - Inicializar proyecto Next.js 14 con App Router
     - Configurar TypeScript, ESLint, Prettier
@@ -27,14 +27,14 @@ El plan sigue un enfoque de entrega incremental en 4 fases, comenzando con el MV
     - Crear estructura de carpetas según diseño
     - _Requisitos: 3.1, 3.2_
   
-  - [ ] 1.2 Configurar proyecto FastAPI backend
+  - [x] 1.2 Configurar proyecto FastAPI backend
     - Inicializar proyecto Python con FastAPI
     - Configurar estructura de carpetas (models, schemas, api, services)
     - Configurar CORS para permitir requests desde frontend
     - Crear archivo requirements.txt con dependencias
     - _Requisitos: 3.1, 3.2_
 
-  - [ ] 1.3 Configurar base de datos PostgreSQL en Supabase
+  - [x] 1.3 Configurar base de datos PostgreSQL en Supabase
     - Crear proyecto en Supabase
     - Ejecutar script SQL para crear tablas (users, semesters, teams, exercises, submissions, grades, etc.)
     - Configurar índices para optimización de queries
@@ -45,21 +45,21 @@ El plan sigue un enfoque de entrega incremental en 4 fases, comenzando con el MV
     - **Propiedad 1: Validación de Correo Institucional**
     - **Valida: Requisitos 1.1, 1.2**
 
-- [ ] 2. Sistema de autenticación y gestión de usuarios
-  - [ ] 2.1 Implementar modelos de base de datos para usuarios y autenticación
+- [x] 2. Sistema de autenticación y gestión de usuarios
+  - [x] 2.1 Implementar modelos de base de datos para usuarios y autenticación
     - Crear modelo User con SQLAlchemy (email, password_hash, full_name, role, semester_id)
     - Crear modelo Invitation para tokens de invitación
     - Implementar relaciones entre modelos
     - _Requisitos: 1.1, 1.2, 2.1_
   
-  - [ ] 2.2 Implementar endpoints de autenticación en FastAPI
+  - [x] 2.2 Implementar endpoints de autenticación en FastAPI
     - POST /api/auth/register - Registro con validación de correo institucional
     - POST /api/auth/login - Login con JWT tokens
     - GET /api/auth/me - Obtener usuario actual
     - Implementar middleware de autenticación
     - _Requisitos: 1.1, 1.2, 1.3_
   
-  - [ ] 2.3 Implementar sistema de invitaciones para profesores
+  - [x] 2.3 Implementar sistema de invitaciones para profesores
     - POST /api/auth/invite - Cargar CSV y enviar invitaciones
     - Validar formato de correos institucionales
     - Generar tokens UUID únicos con expiración
@@ -74,7 +74,7 @@ El plan sigue un enfoque de entrega incremental en 4 fases, comenzando con el MV
     - **Propiedad 3: Registro con Invitación Válida**
     - **Valida: Requisito 2.6**
   
-  - [ ] 2.6 Crear componentes de autenticación en frontend
+  - [x] 2.6 Crear componentes de autenticación en frontend
     - Página de login con formulario
     - Página de registro con validación de token de invitación
     - Componente de protección de rutas (middleware)
@@ -82,8 +82,8 @@ El plan sigue un enfoque de entrega incremental en 4 fases, comenzando con el MV
     - _Requisitos: 1.1, 1.2, 1.3, 2.6_
 
 
-- [ ] 3. Gestión de semestres
-  - [ ] 3.1 Implementar modelo y endpoints de semestres
+- [x] 3. Gestión de semestres
+  - [x] 3.1 Implementar modelo y endpoints de semestres
     - Crear modelo Semester (name, start_date, end_date, status)
     - POST /api/semesters - Crear semestre (solo profesores)
     - GET /api/semesters - Listar semestres
@@ -98,21 +98,21 @@ El plan sigue un enfoque de entrega incremental en 4 fases, comenzando con el MV
     - **Propiedad 14: Cálculo de Fechas de Entrega**
     - **Valida: Requisito 33.14**
   
-  - [ ] 3.4 Crear interfaz de gestión de semestres para profesores
+  - [x] 3.4 Crear interfaz de gestión de semestres para profesores
     - Página de administración de semestres
     - Formulario de creación con validación de fechas
     - Vista de semestre activo con fechas de entrega
     - _Requisitos: 33.1, 33.2, 33.14_
 
-- [ ] 4. Integración de Pyodide para ejecución de Python
-  - [ ] 4.1 Configurar Web Worker para Pyodide
+- [x] 4. Integración de Pyodide para ejecución de Python
+  - [x] 4.1 Configurar Web Worker para Pyodide
     - Crear worker de Pyodide (workers/pyodide.worker.ts)
     - Implementar carga de Pyodide desde CDN
     - Cargar paquetes necesarios (numpy, pandas, matplotlib)
     - Configurar matplotlib para output en base64
     - _Requisitos: 4.1, 4.2_
   
-  - [ ] 4.2 Implementar sistema de ejecución de código Python
+  - [x] 4.2 Implementar sistema de ejecución de código Python
     - Crear hook usePyodide para React
     - Implementar captura de stdout y stderr
     - Implementar captura de gráficos matplotlib
@@ -129,8 +129,8 @@ El plan sigue un enfoque de entrega incremental en 4 fases, comenzando con el MV
     - **Valida: Requisito 5.3**
 
 
-- [ ] 5. Interfaz de laboratorio con 4 paneles
-  - [ ] 5.1 Implementar layout de 4 paneles redimensionables
+- [x] 5. Interfaz de laboratorio con 4 paneles
+  - [x] 5.1 Implementar layout de 4 paneles redimensionables
     - Crear componente LaboratoryLayout con ResizablePanelGroup
     - Implementar Panel de Contenido (25% ancho inicial)
     - Implementar Panel de Código (35% ancho inicial)
@@ -139,13 +139,13 @@ El plan sigue un enfoque de entrega incremental en 4 fases, comenzando con el MV
     - Guardar tamaños de paneles en localStorage
     - _Requisitos: 3.4, 3.5, 3.6, 3.7, 3.8_
   
-  - [ ] 5.2 Implementar Panel de Contenido
+  - [x] 5.2 Implementar Panel de Contenido
     - Renderizar contenido de lecciones en formato Markdown
     - Mostrar ejemplos de código con syntax highlighting
     - Implementar navegación entre lecciones
     - _Requisitos: 3.4, 11.1_
   
-  - [ ] 5.3 Implementar Panel de Código con Monaco Editor
+  - [x] 5.3 Implementar Panel de Código con Monaco Editor
     - Integrar Monaco Editor con tema oscuro
     - Configurar autocompletado para Python
     - Agregar snippets personalizados para bibliotecas financieras
@@ -153,28 +153,28 @@ El plan sigue un enfoque de entrega incremental en 4 fases, comenzando con el MV
     - Implementar validación de sintaxis en tiempo real
     - _Requisitos: 3.5, 12.1, 12.2, 12.3_
   
-  - [ ] 5.4 Implementar Panel de Resultados
+  - [x] 5.4 Implementar Panel de Resultados
     - Mostrar output de texto (stdout)
     - Renderizar gráficos matplotlib como imágenes
     - Mostrar errores con formato legible
     - Implementar tabs para múltiples outputs
     - _Requisitos: 3.6, 5.2, 5.3_
   
-  - [ ] 5.5 Implementar Panel de Ejercicios
+  - [x] 5.5 Implementar Panel de Ejercicios
     - Listar ejercicios del módulo actual
     - Mostrar estado (completado/pendiente)
     - Implementar selector de ejercicio
     - Cargar código inicial al seleccionar ejercicio
     - _Requisitos: 3.7, 6.1_
 
-- [ ] 6. Sistema de ejercicios con validación automática
-  - [ ] 6.1 Implementar modelos de ejercicios en backend
+- [x] 6. Sistema de ejercicios con validación automática
+  - [x] 6.1 Implementar modelos de ejercicios en backend
     - Crear modelo Exercise (title, description, starter_code, test_cases, hints)
     - Crear modelo ExerciseSubmission (user_id, exercise_id, code, status)
     - Implementar relaciones con módulos y lecciones
     - _Requisitos: 6.1, 6.2_
   
-  - [ ] 6.2 Implementar endpoints de ejercicios
+  - [x] 6.2 Implementar endpoints de ejercicios
     - GET /api/exercises/module/{module_id} - Listar ejercicios por módulo
     - GET /api/exercises/{id} - Obtener ejercicio específico
     - POST /api/exercises/{id}/submit - Enviar solución
@@ -182,7 +182,7 @@ El plan sigue un enfoque de entrega incremental en 4 fases, comenzando con el MV
     - _Requisitos: 6.1, 6.2, 6.3, 8.1_
 
 
-  - [ ] 6.3 Implementar validación automática de ejercicios
+  - [x] 6.3 Implementar validación automática de ejercicios
     - Ejecutar casos de prueba en Pyodide
     - Comparar output esperado vs output real
     - Marcar ejercicio como completado si todos los tests pasan
@@ -197,50 +197,50 @@ El plan sigue un enfoque de entrega incremental en 4 fases, comenzando con el MV
     - **Propiedad 7: Actualización de Progreso**
     - **Valida: Requisito 6.4**
   
-  - [ ] 6.6 Crear interfaz de ejercicios en frontend
+  - [x] 6.6 Crear interfaz de ejercicios en frontend
     - Componente de visualización de ejercicio
     - Indicador de tests pasados/fallidos
     - Botón de envío de solución
     - Animación de celebración al completar
     - _Requisitos: 6.1, 6.3, 6.4_
 
-- [ ] 7. Sistema de tutoriales y pistas
-  - [ ] 7.1 Implementar sistema de tutoriales interactivos
+- [x] 7. Sistema de tutoriales y pistas
+  - [x] 7.1 Implementar sistema de tutoriales interactivos
     - Crear componente de tutorial con pasos guiados
     - Implementar overlay de resaltado de elementos
     - Agregar tooltips explicativos
     - Guardar progreso de tutorial en localStorage
     - _Requisitos: 7.1, 7.2_
   
-  - [ ] 7.2 Implementar sistema de pistas progresivas
+  - [x] 7.2 Implementar sistema de pistas progresivas
     - Mostrar pistas una a la vez
     - Implementar botón "Mostrar siguiente pista"
     - Limitar número de pistas disponibles
     - Registrar uso de pistas en backend
     - _Requisitos: 8.1, 8.2_
 
-- [ ] 8. Retroalimentación en tiempo real
-  - [ ] 8.1 Implementar validación de sintaxis en tiempo real
+- [x] 8. Retroalimentación en tiempo real
+  - [x] 8.1 Implementar validación de sintaxis en tiempo real
     - Detectar errores comunes de Python
     - Mostrar warnings en el editor
     - Sugerir correcciones automáticas
     - _Requisitos: 13.1, 13.2_
   
-  - [ ] 8.2 Implementar sistema de feedback inmediato
+  - [x] 8.2 Implementar sistema de feedback inmediato
     - Mostrar mensajes de éxito/error al ejecutar código
     - Indicar qué tests pasaron/fallaron
     - Sugerir mejoras de código
     - _Requisitos: 13.1, 13.2_
 
 
-- [ ] 9. Gestión de equipos
-  - [ ] 9.1 Implementar modelos de equipos en backend
+- [x] 9. Gestión de equipos
+  - [x] 9.1 Implementar modelos de equipos en backend
     - Crear modelo Team (name, semester_id, repository_url, leader_id)
     - Crear modelo TeamMember (team_id, user_id)
     - Implementar validación de tamaño de equipo (2-4 miembros)
     - _Requisitos: 9.1, 9.2, 9.6, 9.7_
   
-  - [ ] 9.2 Implementar endpoints de gestión de equipos
+  - [x] 9.2 Implementar endpoints de gestión de equipos
     - POST /api/teams - Crear equipo
     - POST /api/teams/{id}/invite - Invitar miembro
     - POST /api/teams/{id}/join - Aceptar invitación
@@ -252,41 +252,41 @@ El plan sigue un enfoque de entrega incremental en 4 fases, comenzando con el MV
     - **Propiedad 8: Límites de Tamaño de Equipo**
     - **Valida: Requisitos 9.6, 9.7**
   
-  - [ ] 9.4 Crear interfaz de gestión de equipos
+  - [x] 9.4 Crear interfaz de gestión de equipos
     - Página de creación de equipo
     - Lista de miembros con roles
     - Sistema de invitaciones
     - Vista de equipos del semestre
     - _Requisitos: 9.1, 9.2, 9.3, 9.4, 9.5_
 
-- [ ] 10. Integración con GitHub
-  - [ ] 10.1 Implementar OAuth de GitHub en backend
+- [x] 10. Integración con GitHub
+  - [x] 10.1 Implementar OAuth de GitHub en backend
     - Configurar GitHub OAuth App
     - POST /api/auth/github/connect - Conectar cuenta GitHub
     - Almacenar token de GitHub encriptado
     - _Requisitos: 34.1, 34.2_
   
-  - [ ] 10.2 Implementar vinculación de repositorio a equipo
+  - [x] 10.2 Implementar vinculación de repositorio a equipo
     - PUT /api/teams/{id}/repository - Vincular repositorio
     - Validar que el repositorio existe y el usuario tiene acceso
     - Mostrar información del repositorio en interfaz
     - _Requisitos: 34.3, 34.4_
   
-  - [ ] 10.3 Crear componente de conexión con GitHub
+  - [x] 10.3 Crear componente de conexión con GitHub
     - Botón de "Conectar con GitHub"
     - Flujo de OAuth
     - Selector de repositorio
     - _Requisitos: 34.1, 34.2, 34.3_
 
 
-- [ ] 11. Integración con Google Colab
-  - [ ] 11.1 Implementar exportación a formato .ipynb
+- [x] 11. Integración con Google Colab
+  - [x] 11.1 Implementar exportación a formato .ipynb
     - POST /api/colab/export - Convertir código a notebook
     - Generar estructura JSON de notebook válida
     - Incluir metadata de Colab
     - _Requisitos: 37.1, 37.2, 37.3_
   
-  - [ ] 11.2 Implementar importación desde Colab
+  - [x] 11.2 Implementar importación desde Colab
     - POST /api/colab/import - Importar notebook
     - Parsear estructura de notebook
     - Extraer código de celdas
@@ -296,27 +296,27 @@ El plan sigue un enfoque de entrega incremental en 4 fases, comenzando con el MV
     - **Propiedad 15: Round-Trip de Integración con Google Colab**
     - **Valida: Requisitos 37.3, 37.9, 37.20**
   
-  - [ ] 11.4 Crear componentes de integración con Colab
+  - [x] 11.4 Crear componentes de integración con Colab
     - Botón "Abrir en Colab"
     - Botón "Importar desde Colab"
     - Modal de confirmación
     - _Requisitos: 37.1, 37.9_
 
-- [ ] 12. Sistema de entregas de proyectos
-  - [ ] 12.1 Implementar modelos de entregas en backend
+- [x] 12. Sistema de entregas de proyectos
+  - [x] 12.1 Implementar modelos de entregas en backend
     - Crear modelo ProjectSubmission (team_id, submission_type, notebook_url, status, grade)
     - Crear modelo SubmissionConfirmation (submission_id, user_id)
     - Implementar lógica de confirmación por todos los miembros
     - _Requisitos: 10.1, 10.2, 10.11_
   
-  - [ ] 12.2 Implementar integración con Cloudinary
+  - [x] 12.2 Implementar integración con Cloudinary
     - Configurar Cloudinary SDK
     - Implementar upload de notebooks
     - Validar formato .ipynb
     - Validar tamaño máximo (10MB)
     - _Requisitos: 10.3, 10.4, 16.1_
   
-  - [ ] 12.3 Implementar endpoints de entregas
+  - [x] 12.3 Implementar endpoints de entregas
     - POST /api/submissions - Crear entrega
     - POST /api/submissions/{id}/confirm - Confirmar entrega
     - GET /api/submissions/team/{team_id} - Entregas del equipo
@@ -332,21 +332,21 @@ El plan sigue un enfoque de entrega incremental en 4 fases, comenzando con el MV
     - **Valida: Requisitos 16.1, 16.2, 16.3**
 
 
-  - [ ] 12.6 Crear interfaz de entregas
+  - [x] 12.6 Crear interfaz de entregas
     - Formulario de subida de notebook
     - Sistema de confirmación por miembros
     - Vista de entregas del equipo
     - Indicador de estado (pending/confirmed/graded)
     - _Requisitos: 10.1, 10.2, 10.11_
 
-- [ ] 13. Sistema de calificaciones
-  - [ ] 13.1 Implementar modelo de calificaciones
+- [x] 13. Sistema de calificaciones
+  - [x] 13.1 Implementar modelo de calificaciones
     - Crear modelo Grade (user_id, semester_id, trabajo_1, trabajo_2, concurso, examen, seguimiento)
     - Implementar cálculo automático de calificación final (20% cada componente)
     - Implementar cálculo de seguimiento basado en progreso
     - _Requisitos: 10.18, 35.1, 35.11_
   
-  - [ ] 13.2 Implementar endpoints de calificaciones
+  - [x] 13.2 Implementar endpoints de calificaciones
     - GET /api/grades/me - Calificaciones del usuario
     - PUT /api/grades/{user_id} - Actualizar calificaciones (profesor)
     - GET /api/grades/semester/{semester_id} - Todas las calificaciones (profesor)
@@ -357,34 +357,34 @@ El plan sigue un enfoque de entrega incremental en 4 fases, comenzando con el MV
     - **Propiedad 10: Cálculo de Calificación Final Ponderada**
     - **Valida: Requisitos 10.18, 35.11**
   
-  - [ ] 13.4 Crear interfaz de calificaciones
+  - [x] 13.4 Crear interfaz de calificaciones
     - Vista de calificaciones para estudiantes
     - Panel de calificación para profesores
     - Gráfico de distribución de calificaciones
     - _Requisitos: 10.18, 35.1, 35.2_
 
-- [ ] 14. Sistema de progreso del estudiante
-  - [ ] 14.1 Implementar modelo de progreso
+- [x] 14. Sistema de progreso del estudiante
+  - [x] 14.1 Implementar modelo de progreso
     - Crear modelo StudentProgress (user_id, module_id, exercises_completed, exercises_total)
     - Implementar cálculo automático de porcentaje de completación
     - Crear modelo CodeActivity para registrar actividad
     - _Requisitos: 6.4, 35.3, 35.4_
   
-  - [ ] 14.2 Implementar endpoints de progreso
+  - [x] 14.2 Implementar endpoints de progreso
     - GET /api/progress/me - Progreso del usuario
     - GET /api/progress/module/{module_id} - Progreso en módulo
     - POST /api/progress/activity - Registrar actividad de código
     - _Requisitos: 35.3, 35.4_
   
-  - [ ] 14.3 Crear componentes de visualización de progreso
+  - [x] 14.3 Crear componentes de visualización de progreso
     - Barra de progreso por módulo
     - Dashboard de progreso general
     - Indicadores de ejercicios completados
     - _Requisitos: 35.3, 35.4_
 
 
-- [ ] 15. Contenido del Módulo 1: Fundamentos de Python
-  - [ ] 15.1 Crear lecciones del Módulo 1
+- [x] 15. Contenido del Módulo 1: Fundamentos de Python
+  - [x] 15.1 Crear lecciones del Módulo 1
     - Lección 1.1: Variables y tipos de datos
     - Lección 1.2: Operadores y expresiones
     - Lección 1.3: Estructuras de control (if, for, while)
@@ -392,56 +392,56 @@ El plan sigue un enfoque de entrega incremental en 4 fases, comenzando con el MV
     - Incluir ejemplos de código y explicaciones
     - _Requisitos: 17.1, 17.2_
   
-  - [ ] 15.2 Crear ejercicios del Módulo 1
+  - [x] 15.2 Crear ejercicios del Módulo 1
     - 5-10 ejercicios por lección
     - Incluir casos de prueba automáticos
     - Definir código inicial (starter code)
     - Crear pistas progresivas
     - _Requisitos: 17.1, 17.2_
 
-- [ ] 16. Contenido del Módulo 2: Estructuras de Datos
-  - [ ] 16.1 Crear lecciones del Módulo 2
+- [x] 16. Contenido del Módulo 2: Estructuras de Datos
+  - [x] 16.1 Crear lecciones del Módulo 2
     - Lección 2.1: Listas y tuplas
     - Lección 2.2: Diccionarios y sets
     - Lección 2.3: Comprensiones de listas
     - Lección 2.4: Manipulación de strings
     - _Requisitos: 18.1, 18.2_
   
-  - [ ] 16.2 Crear ejercicios del Módulo 2
+  - [x] 16.2 Crear ejercicios del Módulo 2
     - 5-10 ejercicios por lección
     - Incluir casos de prueba
     - Enfoque en manipulación de datos
     - _Requisitos: 18.1, 18.2_
 
-- [ ] 17. Contenido del Módulo 3: Introducción a Pandas
-  - [ ] 17.1 Crear lecciones del Módulo 3
+- [x] 17. Contenido del Módulo 3: Introducción a Pandas
+  - [x] 17.1 Crear lecciones del Módulo 3
     - Lección 3.1: DataFrames y Series
     - Lección 3.2: Lectura y escritura de datos
     - Lección 3.3: Filtrado y selección
     - Lección 3.4: Operaciones básicas
     - _Requisitos: 19.1, 19.2_
   
-  - [ ] 17.2 Crear ejercicios del Módulo 3
+  - [x] 17.2 Crear ejercicios del Módulo 3
     - 5-10 ejercicios por lección
     - Usar datasets financieros simples
     - Incluir visualizaciones básicas
     - _Requisitos: 19.1, 19.2_
 
-- [ ] 18. Sistema de entrega para Trabajo 1
-  - [ ] 18.1 Crear especificación del Trabajo 1
+- [x] 18. Sistema de entrega para Trabajo 1
+  - [x] 18.1 Crear especificación del Trabajo 1
     - Definir requisitos del proyecto
     - Crear rúbrica de evaluación
     - Establecer fecha de entrega (semana 6)
     - _Requisitos: 10.1, 10.2, 33.14_
   
-  - [ ] 18.2 Implementar validación específica para Trabajo 1
+  - [x] 18.2 Implementar validación específica para Trabajo 1
     - Validar que incluye análisis de datos con Pandas
     - Validar que incluye al menos 2 visualizaciones
     - Verificar estructura del notebook
     - _Requisitos: 16.1, 16.2, 16.3_
 
 
-- [ ] 19. Checkpoint - Verificar MVP funcional
+- [x] 19. Checkpoint - Verificar MVP funcional
   - Verificar que todos los componentes del MVP funcionan correctamente
   - Ejecutar suite completa de tests
   - Validar flujo completo: registro → laboratorio → ejercicios → entrega
