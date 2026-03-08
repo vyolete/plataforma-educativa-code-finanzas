@@ -58,12 +58,12 @@ export default function ProfessorLayout({
   }
 
   const navigation = [
-    { name: 'Dashboard', href: '/admin', icon: '📊' },
-    { name: 'Semestres', href: '/semesters', icon: '📅' },
-    { name: 'Estudiantes', href: '/students', icon: '👥' },
-    { name: 'Equipos', href: '/teams', icon: '🤝' },
-    { name: 'Entregas', href: '/submissions', icon: '📝' },
+    { name: 'Semestres', href: '/professor/semesters', icon: '📅' },
+    { name: 'Equipos', href: '/professor/teams', icon: '🤝' },
+    { name: 'Entregas', href: '/professor/submissions', icon: '📝' },
+    { name: 'Calificaciones', href: '/professor/grades', icon: '📊' },
   ];
+
 
   return (
     <div className="min-h-screen bg-gray-50">

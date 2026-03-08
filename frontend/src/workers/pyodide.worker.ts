@@ -52,12 +52,13 @@ async function loadPyodide(): Promise<void> {
   loadingPromise = (async () => {
     try {
       // Load Pyodide from CDN
-      // @ts-ignore - Pyodide is loaded from CDN
-      const pyodideModule = await import('https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.mjs');
-      pyodide = await pyodideModule.loadPyodide({
+      // @ts-ignore
+      self.importScripts('https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js');
+      // @ts-ignore
+      pyodide = await self.loadPyodide({
         indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.24.1/full/'
       });
-      
+
       // Load required packages
       await pyodide.loadPackage(['numpy', 'pandas', 'matplotlib']);
       
