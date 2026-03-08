@@ -567,7 +567,7 @@ Los profesores pueden monitorear el progreso detallado, revisar ejercicios, gest
 3. THE Sistema SHALL mostrar la fórmula matemática utilizada en cada Calculadora_Financiera
 4. WHEN un Estudiante usa una Calculadora_Financiera, THE Sistema SHALL generar automáticamente el código Python equivalente
 5. THE Sistema SHALL permitir al Estudiante insertar el código generado en el Panel_Código con un clic
-6. THE Sistema SHALL mostrar visualizaciones dinámicas que cambien según los parámetros de la Calculadora_Financiera
+6. THE Sistema SHALL mostrar visualizaciones dinámicas que cambien según los parámetros de la Calculadodonra_Financiera
 7. THE Sistema SHALL incluir explicaciones didácticas de cada métrica financiera en la Calculadora_Financiera
 
 ### Requisito 32: Transiciones Animadas y Feedback Visual

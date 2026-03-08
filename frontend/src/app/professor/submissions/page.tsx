@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useAuth } from '@/lib/auth/AuthContext';
+import { useAuth } from '@/contexts/AuthContext';
 import { submissionsApi, ProjectSubmission } from '@/lib/api/submissions';
 
 export default function ProfessorSubmissionsPage() {

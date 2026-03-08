@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useAuth } from '@/lib/auth/AuthContext';
+import { useAuth } from '@/contexts/AuthContext';
 import { teamsApi, Team } from '@/lib/api/teams';
 import SubmissionUploadForm from '@/components/submissions/SubmissionUploadForm';
 import SubmissionsList from '@/components/submissions/SubmissionsList';

@@ -158,11 +158,11 @@ interes = capital_inicial * tasa_interes * años
 capital_final = capital_inicial + interes
 
 # Mostrar resultados
-print(f"Capital inicial: ${capital_inicial:,.2f}")
+print(f"Capital inicial: \${capital_inicial:,.2f}")
 print(f"Tasa de interés: {tasa_interes * 100}%")
 print(f"Período: {años} años")
-print(f"Interés ganado: ${interes:,.2f}")
-print(f"Capital final: ${capital_final:,.2f}")
+print(f"Interés ganado: \${interes:,.2f}")
+print(f"Capital final: \${capital_final:,.2f}")
 
 # Salida:
 # Capital inicial: $10,000.00
@@ -187,7 +187,7 @@ Antes de continuar, asegúrate de entender:
 - Python infiere el tipo automáticamente según el valor asignado
 - Usa nombres descriptivos para tus variables (precio_accion, no x)
 - Los tipos básicos son: **int** (enteros), **float** (decimales), **str** (texto), **bool** (verdadero/falso)
-- Usa f-strings para formatear texto: \`f"Precio: ${precio}"\`
+- Usa f-strings para formatear texto: \`f"Precio: \${precio}"\`
 - Puedes convertir entre tipos con int(), float(), str()
 `
   },
@@ -247,9 +247,9 @@ valor_bac = acciones_bac * precio_bac  # 704.0
 # Valor total del portafolio
 valor_total = valor_jpm + valor_bac  # 2211.5
 
-print(f"Valor JPM: ${valor_jpm:,.2f}")
-print(f"Valor BAC: ${valor_bac:,.2f}")
-print(f"Valor Total: ${valor_total:,.2f}")
+print(f"Valor JPM: \${valor_jpm:,.2f}")
+print(f"Valor BAC: \${valor_bac:,.2f}")
+print(f"Valor Total: \${valor_total:,.2f}")
 \`\`\`
 
 ## Operadores de Comparación
@@ -394,10 +394,10 @@ rendimiento_total = (ganancia_total / inversion_inicial) * 100
 
 # Mostrar resultados
 print(f"=== Análisis de Inversión: {ticker} ===")
-print(f"Inversión inicial: ${inversion_inicial:,.2f}")
-print(f"Ganancia de capital: ${ganancia_capital:,.2f} ({rendimiento_capital:.2f}%)")
-print(f"Ingresos por dividendos: ${ingresos_dividendos:,.2f} ({rendimiento_dividendos:.2f}%)")
-print(f"Ganancia total: ${ganancia_total:,.2f}")
+print(f"Inversión inicial: \${inversion_inicial:,.2f}")
+print(f"Ganancia de capital: \${ganancia_capital:,.2f} ({rendimiento_capital:.2f}%)")
+print(f"Ingresos por dividendos: \${ingresos_dividendos:,.2f} ({rendimiento_dividendos:.2f}%)")
+print(f"Ganancia total: \${ganancia_total:,.2f}")
 print(f"Rendimiento total: {rendimiento_total:.2f}%")
 
 # Salida:
@@ -556,9 +556,9 @@ for posicion in portafolio:
     valor = precio * cantidad
     valor_total += valor
     
-    print(f"{ticker}: {cantidad} acciones × ${precio} = ${valor:,.2f}")
+    print(f"{ticker}: {cantidad} acciones × \${precio} = \${valor:,.2f}")
 
-print(f"\nValor total del portafolio: ${valor_total:,.2f}")
+print(f"\nValor total del portafolio: \${valor_total:,.2f}")
 
 # Salida:
 # === Análisis de Portafolio ===
@@ -585,7 +585,7 @@ while capital < objetivo:
     años += 1
     interes = capital * tasa_anual
     capital += interes
-    print(f"Año {años}: ${capital:,.2f}")
+    print(f"Año {años}: \${capital:,.2f}")
 
 print(f"\n¡Objetivo alcanzado en {años} años!")
 
@@ -657,7 +657,7 @@ print("Acciones con precio > $50:")
 for ticker, precio in precios:
     if precio <= 50:
         continue  # Saltar esta iteración
-    print(f"{ticker}: ${precio}")
+    print(f"{ticker}: \${precio}")
 
 # Salida:
 # Acciones con precio > $50:
@@ -691,7 +691,7 @@ for accion in acciones:
     dividendo = accion["dividendo"]
     
     print(f"Analizando {ticker}:")
-    print(f"  Precio: ${precio}")
+    print(f"  Precio: \${precio}")
     print(f"  P/E: {pe}")
     print(f"  Dividendo: {dividendo}%")
     
@@ -794,7 +794,7 @@ saludar_persona("Carlos")  # ¡Hola, Carlos!
 # Función con múltiples parámetros
 def calcular_valor_posicion(precio, cantidad):
     valor = precio * cantidad
-    print(f"Valor de la posición: ${valor:,.2f}")
+    print(f"Valor de la posición: \${valor:,.2f}")
 
 # Llamar con argumentos posicionales
 calcular_valor_posicion(150.0, 10)  # Valor de la posición: $1,500.00
@@ -838,8 +838,8 @@ def analizar_inversion(precio_compra, precio_venta, dividendos):
 
 # Desempaquetar valores retornados
 gan_cap, gan_tot, rend = analizar_inversion(100.0, 120.0, 5.0)
-print(f"Ganancia capital: ${gan_cap}")
-print(f"Ganancia total: ${gan_tot}")
+print(f"Ganancia capital: \${gan_cap}")
+print(f"Ganancia total: \${gan_tot}")
 print(f"Rendimiento: {rend}%")
 \`\`\`
 
@@ -906,7 +906,7 @@ portafolio = [
 ]
 
 valor = calcular_valor_portafolio(portafolio)
-print(f"Valor del portafolio: ${valor:,.2f}")
+print(f"Valor del portafolio: \${valor:,.2f}")
 
 rendimiento = calcular_rendimiento_porcentual(140.0, 155.0)
 print(f"Rendimiento: {rendimiento:.2f}%")
@@ -933,7 +933,7 @@ def calcular_ganancia_neta(ganancia_bruta):
     return ganancia_neta
 
 ganancia = calcular_ganancia_neta(1000)
-print(f"Ganancia neta: ${ganancia}")  # $850.0
+print(f"Ganancia neta: \${ganancia}")  # $850.0
 
 # print(impuesto)  # ❌ Error: impuesto no existe fuera de la función
 
@@ -1045,19 +1045,19 @@ def comparar_inversiones(capital, tasa, años):
 def mostrar_resultados(resultados):
     """Muestra los resultados de forma legible."""
     print("=== Comparación de Inversiones ===")
-    print(f"Capital inicial: ${resultados['capital_inicial']:,.2f}")
+    print(f"Capital inicial: \${resultados['capital_inicial']:,.2f}")
     print(f"Tasa de interés: {resultados['tasa'] * 100}%")
     print(f"Período: {resultados['años']} años")
     print()
     print("Interés Simple:")
-    print(f"  Interés ganado: ${resultados['interes_simple']:,.2f}")
-    print(f"  Capital final: ${resultados['capital_final_simple']:,.2f}")
+    print(f"  Interés ganado: \${resultados['interes_simple']:,.2f}")
+    print(f"  Capital final: \${resultados['capital_final_simple']:,.2f}")
     print()
     print("Interés Compuesto:")
-    print(f"  Interés ganado: ${resultados['interes_compuesto']:,.2f}")
-    print(f"  Capital final: ${resultados['capital_final_compuesto']:,.2f}")
+    print(f"  Interés ganado: \${resultados['interes_compuesto']:,.2f}")
+    print(f"  Capital final: \${resultados['capital_final_compuesto']:,.2f}")
     print()
-    print(f"Diferencia: ${resultados['diferencia']:,.2f}")
+    print(f"Diferencia: \${resultados['diferencia']:,.2f}")
 
 # Usar las funciones
 resultados = comparar_inversiones(10000, 0.08, 5)
@@ -1266,9 +1266,9 @@ precio_maximo = max(precios_jpm)
 precio_promedio = sum(precios_jpm) / len(precios_jpm)
 
 print(f"Análisis de JPM (últimos 10 días)")
-print(f"Precio mínimo: ${precio_minimo}")
-print(f"Precio máximo: ${precio_maximo}")
-print(f"Precio promedio: ${precio_promedio:.2f}")
+print(f"Precio mínimo: \${precio_minimo}")
+print(f"Precio máximo: \${precio_maximo}")
+print(f"Precio promedio: \${precio_promedio:.2f}")
 
 # Calcular rendimiento diario
 rendimientos = []
@@ -1321,7 +1321,7 @@ primeros_dos = datos_accion[:2]  # ("JPM", 150.0)
 
 # Desempaquetado (muy útil!)
 ticker, precio, volumen, activo = datos_accion
-print(f"{ticker}: ${precio} (Volumen: {volumen})")
+print(f"{ticker}: \${precio} (Volumen: {volumen})")
 \`\`\`
 
 ### ¿Por qué usar Tuplas?
@@ -1345,7 +1345,7 @@ def analizar_accion(precio_compra, precio_actual):
     return ganancia, rendimiento  # Retorna tupla
 
 gan, rend = analizar_accion(140.0, 155.0)
-print(f"Ganancia: ${gan}, Rendimiento: {rend:.2f}%")
+print(f"Ganancia: \${gan}, Rendimiento: {rend:.2f}%")
 \`\`\`
 
 ## Ejemplo Completo: Sistema de Gestión de Portafolio
@@ -1381,9 +1381,9 @@ for ticker, precio_compra, cantidad, precio_actual in portafolio:
     
     # Mostrar análisis individual
     print(f"{ticker}:")
-    print(f"  Inversión: ${inversion:,.2f}")
-    print(f"  Valor actual: ${valor_actual:,.2f}")
-    print(f"  Ganancia: ${ganancia:+,.2f}")
+    print(f"  Inversión: \${inversion:,.2f}")
+    print(f"  Valor actual: \${valor_actual:,.2f}")
+    print(f"  Ganancia: \${ganancia:+,.2f}")
     print(f"  Rendimiento: {rendimiento:+.2f}%")
     print()
 
@@ -1391,9 +1391,9 @@ for ticker, precio_compra, cantidad, precio_actual in portafolio:
 rendimiento_total = (ganancias_totales / valor_total_invertido) * 100
 
 print("=== Resumen General ===")
-print(f"Inversión total: ${valor_total_invertido:,.2f}")
-print(f"Valor actual: ${valor_total_actual:,.2f}")
-print(f"Ganancias totales: ${ganancias_totales:+,.2f}")
+print(f"Inversión total: \${valor_total_invertido:,.2f}")
+print(f"Valor actual: \${valor_total_actual:,.2f}")
+print(f"Ganancias totales: \${ganancias_totales:+,.2f}")
 print(f"Rendimiento total: {rendimiento_total:+.2f}%")
 
 # Encontrar mejor y peor inversión
@@ -1615,7 +1615,7 @@ ticker_buscar = "JPM"
 if ticker_buscar in acciones_db:
     info = acciones_db[ticker_buscar]
     print(f"=== {info['nombre']} ({ticker_buscar}) ===")
-    print(f"Precio: ${info['precio']}")
+    print(f"Precio: \${info['precio']}")
     print(f"P/E Ratio: {info['pe_ratio']}")
     print(f"Dividendo: {info['dividendo']}%")
 
@@ -1739,7 +1739,7 @@ for inversor, datos in portafolios.items():
     capital = datos["capital"]
     
     print(f"{inversor}:")
-    print(f"  Capital: ${capital:,}")
+    print(f"  Capital: \${capital:,}")
     print(f"  Acciones: {', '.join(sorted(acciones))}")
     print(f"  Cantidad de acciones: {len(acciones)}")
     print()
@@ -1780,7 +1780,7 @@ for inversor, datos in portafolios.items():
     acciones = datos["acciones"]
     valor_total = sum(precios[ticker] for ticker in acciones)
     valor_promedio = valor_total / len(acciones)
-    print(f"  {inversor}: ${valor_promedio:.2f}")
+    print(f"  {inversor}: \${valor_promedio:.2f}")
 \`\`\`
 
 ## Checkpoint de Comprensión
@@ -1861,7 +1861,7 @@ print(precios_descuento)
 # [95.0, 99.75, 96.9, 102.6, 104.5]
 
 # Convertir precios a strings formateados
-precios_formateados = [f"${precio:.2f}" for precio in precios]
+precios_formateados = [f"\${precio:.2f}" for precio in precios]
 print(precios_formateados)
 # ['$100.00', '$105.00', '$102.00', '$108.00', '$110.00']
 \`\`\`
@@ -1906,7 +1906,7 @@ print(precios_baratos)  # [35.0, 50.0, 45.0]
 
 # Crear lista de strings descriptivos
 descripciones = [
-    f"{a['ticker']}: ${a['precio']} (P/E: {a['pe']})"
+    f"{a['ticker']}: \${a['precio']} (P/E: {a['pe']})"
     for a in acciones
     if a["precio"] < 200
 ]
@@ -2123,7 +2123,7 @@ for ticker, precio, cantidad in portafolio:
 valores = [precio * cantidad for ticker, precio, cantidad in portafolio]
 
 print(valores)  # [1500.0, 700.0, 750.0]
-print(f"Valor total: ${sum(valores):,.2f}")
+print(f"Valor total: \${sum(valores):,.2f}")
 \`\`\`
 
 ## Cuándo Usar Comprehensions
@@ -2359,17 +2359,17 @@ precio = 150.75
 cantidad = 10
 
 # F-string básico
-mensaje = f"Ticker: {ticker}, Precio: ${precio}"
+mensaje = f"Ticker: {ticker}, Precio: \${precio}"
 print(mensaje)  # Ticker: JPM, Precio: $150.75
 
 # Con expresiones
 valor = precio * cantidad
-mensaje = f"Valor total: ${precio * cantidad}"
+mensaje = f"Valor total: \${precio * cantidad}"
 print(mensaje)  # Valor total: $1507.5
 
 # Formateo de números
 precio = 1507.5
-print(f"Precio: ${precio:,.2f}")  # Precio: $1,507.50
+print(f"Precio: \${precio:,.2f}")  # Precio: $1,507.50
 # ,.2f = separador de miles (,) y 2 decimales (.2f)
 
 # Alineación
@@ -2387,13 +2387,13 @@ print(f"Rendimiento: {rendimiento:.2%}")  # Rendimiento: 10.71%
 
 \`\`\`python
 # Método format (alternativa a f-strings)
-mensaje = "Ticker: {}, Precio: ${}".format("JPM", 150.75)
+mensaje = "Ticker: {}, Precio: \${}".format("JPM", 150.75)
 
 # Con nombres
-mensaje = "Ticker: {t}, Precio: ${p:.2f}".format(t="JPM", p=150.75)
+mensaje = "Ticker: {t}, Precio: \${p:.2f}".format(t="JPM", p=150.75)
 
 # Con índices
-mensaje = "{0} tiene un precio de ${1}".format("JPM", 150.75)
+mensaje = "{0} tiene un precio de \${1}".format("JPM", 150.75)
 \`\`\`
 
 ## Ejemplo Financiero: Generador de Reportes
@@ -2437,20 +2437,20 @@ for accion in acciones:
     ganancia_total += ganancia
     
     # Formatear fila
-    print(f"{ticker:<8} {nombre:<20} ${precio:>9.2f} {cantidad:>6} "
-          f"${valor:>11,.2f} ${ganancia:>+11,.2f}")
+    print(f"{ticker:<8} {nombre:<20} \${precio:>9.2f} {cantidad:>6} "
+          f"\${valor:>11,.2f} \${ganancia:>+11,.2f}")
 
 # Totales
 print("-" * 80)
 print(f"{'TOTAL':<8} {'':<20} {'':<10} {'':<6} "
-      f"${valor_total:>11,.2f} ${ganancia_total:>+11,.2f}")
+      f"\${valor_total:>11,.2f} \${ganancia_total:>+11,.2f}")
 print("=" * 80)
 
 # Resumen
 rendimiento_total = (ganancia_total / (valor_total - ganancia_total)) * 100
 print()
-print(f"Valor total del portafolio: ${valor_total:,.2f}")
-print(f"Ganancia total: ${ganancia_total:+,.2f}")
+print(f"Valor total del portafolio: \${valor_total:,.2f}")
+print(f"Ganancia total: \${ganancia_total:+,.2f}")
 print(f"Rendimiento total: {rendimiento_total:+.2f}%")
 \`\`\`
 
@@ -2486,7 +2486,7 @@ for linea in lineas[1:]:  # Saltar encabezado
 
 # Mostrar datos procesados
 for accion in portafolio:
-    print(f"{accion['ticker']}: ${accion['precio']} × {accion['cantidad']}")
+    print(f"{accion['ticker']}: \${accion['precio']} × {accion['cantidad']}")
 \`\`\`
 
 ## Validación de Datos
@@ -2555,9 +2555,9 @@ def generar_alerta(ticker, precio_actual, precio_objetivo, tipo):
 {simbolo} ALERTA DE {tipo.upper().replace('_', ' ')}
 {'=' * 50}
 Ticker: {ticker}
-Precio actual: ${precio_actual:.2f}
-Precio objetivo: ${precio_objetivo:.2f}
-Diferencia: ${diferencia:+.2f} ({porcentaje:+.2f}%)
+Precio actual: \${precio_actual:.2f}
+Precio objetivo: \${precio_objetivo:.2f}
+Diferencia: \${diferencia:+.2f} ({porcentaje:+.2f}%)
 {'=' * 50}
 """
     
