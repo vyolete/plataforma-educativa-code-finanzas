@@ -11,7 +11,7 @@ export interface Lesson {
   orderIndex: number;
 }
 
-export const sampleLessons: Lesson[] = [
+const sampleLessonsBase: Lesson[] = [
   {
     id: '1-1',
     moduleId: '1',
@@ -2647,7 +2647,6 @@ Antes de continuar, asegúrate de entender:
 // Combine all lessons including Module 3
 const allLessons = [...sampleLessons, ...module3Lessons];
 
-export { allLessons as sampleLessons };
 
 export function getLessonById(lessonId: string): Lesson | undefined {
   return allLessons.find(lesson => lesson.id === lessonId);
@@ -2658,3 +2657,5 @@ export function getLessonsByModule(moduleId: string): Lesson[] {
     .filter(lesson => lesson.moduleId === moduleId)
     .sort((a, b) => a.orderIndex - b.orderIndex);
 }
+const allLessons = [...sampleLessonsBase, ...module3Lessons];
+export const sampleLessons = allLessons;
