@@ -109,3 +109,15 @@ export async function joinTeam(teamId: number): Promise<TeamDetail> {
 export async function removeMember(teamId: number, userId: number): Promise<void> {
   await apiClient.delete(`/api/teams/${teamId}/members/${userId}`);
 }
+
+// Export as object for convenience
+export const teamsApi = {
+  createTeam,
+  getTeams,
+  getTeam,
+  getMyTeam,
+  updateTeam,
+  inviteMember,
+  joinTeam,
+  removeMember,
+};

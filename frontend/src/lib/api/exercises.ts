@@ -84,3 +84,62 @@ export async function getExercisesByLesson(lessonId: string): Promise<Exercise[]
     );
   }
 }
+
+/**
+ * Submit an exercise solution
+ * 
+ * @param exerciseId - ID of the exercise
+ * @param code - Student's code solution
+ * @returns Promise<any> Submission result
+ * @throws Error if the API request fails
+ */
+export async function submitExercise(exerciseId: string, code: string): Promise<any> {
+  try {
+    return await apiClient.post<any>(`/api/exercises/${exerciseId}/submit`, { code });
+  } catch (error) {
+    console.error(`Error submitting exercise ${exerciseId}:`, error);
+    throw new Error(
+      error instanceof Error 
+        ? error.message 
+        : `Failed to submit exercise ${exerciseId}`
+    );
+  }
+}
+
+/**
+ * Update submission result
+ * 
+ * @param submissionId - ID of the submission
+ * @param result - Result data
+ * @returns Promise<any> Updated submission
+ * @throws Error if the API request fails
+ */
+export async function updateSubmissionResult(submissionId: string, result: any): Promise<any> {
+  try {
+    return await apiClient.put<any>(`/api/exercises/submissions/${submissionId}`, result);
+  } catch (error) {
+    console.error(`Error updating submission ${submissionId}:`, error);
+    throw new Error(
+      error instanceof Error 
+        ? error.message 
+        : `Failed to update submission ${submissionId}`
+    );
+  }
+}
+
+/**
+ * Track hint usage for an exercise
+ * 
+ * @param exerciseId - ID of the exercise
+ * @param hintIndex - Index of the hint used
+ * @returns Promise<void>
+ * @throws Error if the API request fails
+ */
+export async function trackHintUsage(exerciseId: string, hintIndex: number): Promise<void> {
+  try {
+    await apiClient.post<void>(`/api/exercises/${exerciseId}/hints/${hintIndex}`);
+  } catch (error) {
+    console.error(`Error tracking hint usage for exercise ${exerciseId}:`, error);
+    // Don't throw - hint tracking is not critical
+  }
+}
