@@ -31,9 +31,9 @@ export default function SubmissionsPage() {
   const loadTeam = async () => {
     try {
       setLoading(true);
-      const teams = await teamsApi.getMyTeams();
-      if (teams.length > 0) {
-        setTeam(teams[0]); // Assuming student is in one team
+      const team = await teamsApi.getMyTeam();
+      if (team) {
+        setTeam(team);
       }
     } catch (error) {
       console.error('Error loading team:', error);
