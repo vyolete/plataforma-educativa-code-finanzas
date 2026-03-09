@@ -203,7 +203,7 @@ export default function CodePanel() {
           <ColabExportButton 
             code={code}
             metadata={{
-              exercise_id: selectedExercise?.id,
+              exercise_id: selectedExercise?.id !== undefined ? Number(selectedExercise.id) : undefined,
               module_id: selectedExercise?.moduleId
             }}
           />
