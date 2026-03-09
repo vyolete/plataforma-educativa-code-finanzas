@@ -204,7 +204,7 @@ export default function CodePanel() {
             code={code}
             metadata={{
               exercise_id: selectedExercise?.id !== undefined ? Number(selectedExercise.id) : undefined,
-              module_id: selectedExercise?.moduleId
+              module_id: selectedExercise?.moduleId !== undefined ? Number(selectedExercise.moduleId) : undefined
             }}
           />
           <button
