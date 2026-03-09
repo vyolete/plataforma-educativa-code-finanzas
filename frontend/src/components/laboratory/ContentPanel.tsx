@@ -126,8 +126,9 @@ export default function ContentPanel({ moduleId = '1', lessonId = '1' }: Content
               rehypePlugins={[rehypeHighlight]}
               components={{
                 // Custom styling for code blocks
-                code: ({ node, inline, className, children, ...props }) => {
-                  return inline ? (
+                code: ({ node, className, children, ...props }) => {
+                  const isInline = !className?.startsWith('language-');
+                  return isInline ? (
                     <code className="bg-gray-700 px-1.5 py-0.5 rounded text-sm text-blue-300" {...props}>
                       {children}
                     </code>
