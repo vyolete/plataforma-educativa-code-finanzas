@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.config import settings
-from app.api import auth, semesters, exercises, teams, colab, submissions, grades, progress
+from app.api import auth, semesters, exercises, teams, colab, submissions, grades, progress, lessons
 
 app = FastAPI(
     title="Plataforma Educativa Python Finanzas API",
@@ -27,6 +27,7 @@ app.include_router(colab.router, prefix="/api/colab", tags=["Google Colab"])
 app.include_router(submissions.router, prefix="/api/submissions", tags=["Submissions"])
 app.include_router(grades.router, prefix="/api/grades", tags=["Grades"])
 app.include_router(progress.router, prefix="/api/progress", tags=["Progress"])
+app.include_router(lessons.router, prefix="/api", tags=["Lessons"])
 
 @app.get("/")
 def root():

@@ -20,6 +20,7 @@ class ProjectSubmission(Base):
     is_late = Column(Boolean, default=False)
     
     # Relationships
+    team = relationship("Team", back_populates="project_submissions")
     semester = relationship("Semester", back_populates="project_submissions")
     confirmations = relationship("SubmissionConfirmation", back_populates="submission", cascade="all, delete-orphan")
 

@@ -2645,8 +2645,8 @@ Antes de continuar, asegúrate de entender:
 ];
 
 // Combine all lessons including Module 3
-const allLessons = [...sampleLessonsBase, ...module3Lessons];
-export const sampleLessons = allLessons;
+const allLessons = [...sampleLessons, ...module3Lessons];
+
 
 export function getLessonById(lessonId: string): Lesson | undefined {
   return allLessons.find(lesson => lesson.id === lessonId);
@@ -2657,3 +2657,5 @@ export function getLessonsByModule(moduleId: string): Lesson[] {
     .filter(lesson => lesson.moduleId === moduleId)
     .sort((a, b) => a.orderIndex - b.orderIndex);
 }
+const allLessons = [...sampleLessonsBase, ...module3Lessons];
+export const sampleLessons = allLessons;

@@ -9,6 +9,7 @@ from app.models.grade import Grade
 from app.models.progress import StudentProgress, CodeActivity
 from app.models.badge import Badge, UserBadge
 from app.models.experience import ExperiencePoint
+from app.models.lesson import Lesson, LessonContent, LessonObjective
 
 __all__ = [
     "Base",
@@ -26,4 +27,7 @@ __all__ = [
     "Badge",
     "UserBadge",
     "ExperiencePoint",
+    "Lesson",
+    "LessonContent",
+    "LessonObjective",
 ]

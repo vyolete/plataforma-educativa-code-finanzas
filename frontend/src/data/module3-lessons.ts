@@ -133,10 +133,10 @@ print(precios_altos)
 # dtype: float64
 
 # Estadísticas
-print(f"Precio promedio: ${precios.mean():.2f}")
-print(f"Precio máximo: ${precios.max():.2f}")
-print(f"Precio mínimo: ${precios.min():.2f}")
-print(f"Desviación estándar: ${precios.std():.2f}")
+print(f"Precio promedio: \${precios.mean():.2f}")
+print(f"Precio máximo: \${precios.max():.2f}")
+print(f"Precio mínimo: \${precios.min():.2f}")
+print(f"Desviación estándar: \${precios.std():.2f}")
 \`\`\`
 
 ## DataFrames: Datos Tabulares
@@ -375,9 +375,9 @@ print(portafolio[['ticker', 'inversion', 'valor_actual', 'ganancia', 'rendimient
 
 # Estadísticas generales
 print(f"\n=== Resumen ===")
-print(f"Inversión total: ${portafolio['inversion'].sum():,.2f}")
-print(f"Valor actual: ${portafolio['valor_actual'].sum():,.2f}")
-print(f"Ganancia total: ${portafolio['ganancia'].sum():,.2f}")
+print(f"Inversión total: \${portafolio['inversion'].sum():,.2f}")
+print(f"Valor actual: \${portafolio['valor_actual'].sum():,.2f}")
+print(f"Ganancia total: \${portafolio['ganancia'].sum():,.2f}")
 print(f"Rendimiento promedio: {portafolio['rendimiento_%'].mean():.2f}%")
 
 # Mejor y peor inversión
@@ -412,9 +412,7 @@ Antes de continuar, asegúrate de entender:
 - Usa \`.head()\`, \`.tail()\`, \`.info()\` y \`.describe()\` para explorar datos
 - Las operaciones aritméticas se aplican a todas las filas automáticamente
 `
-  }
-];
-
+  },
   {
     id: '3-2',
     moduleId: '3',
@@ -728,9 +726,7 @@ Antes de continuar, asegúrate de entender:
 - CSV es ideal para compartir datos entre programas
 - Pandas puede leer muchos otros formatos: Excel, JSON, SQL, etc.
 `
-  }
-];
-
+  },
   {
     id: '3-3',
     moduleId: '3',
@@ -1071,8 +1067,7 @@ Antes de continuar, asegúrate de entender:
 - El filtrado no modifica el DataFrame original (crea una copia)
 `
   }
-];
-
+  },
   {
     id: '3-4',
     moduleId: '3',
@@ -1473,7 +1468,7 @@ print(analisis[['ticker', 'cantidad', 'precio_promedio', 'valor_posicion',
 
 # Resumen
 print(f"\n=== Resumen ===")
-print(f"Valor total del portafolio: ${analisis['valor_posicion'].sum():,.2f}")
+print(f"Valor total del portafolio: \${analisis['valor_posicion'].sum():,.2f}")
 print(f"P/E promedio: {analisis['pe_ratio'].mean():.2f}")
 print(f"Dividendo promedio: {analisis['dividendo'].mean():.2f}%")
 print(f"Mejor inversión: {analisis.iloc[0]['ticker']} (score: {analisis.iloc[0]['score']:.2f})")

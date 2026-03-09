@@ -4,7 +4,7 @@
 
 Este plan implementa una plataforma educativa web moderna para enseñar Python aplicado a análisis financiero. La arquitectura utiliza Next.js + TypeScript para el frontend, FastAPI + Python para el backend, Supabase para base de datos, Cloudinary para almacenamiento, y Pyodide para ejecución de Python en el navegador.
 
-El plan sigue un enfoque de entrega incremental en 4 fases, comenzando con el MVP (Módulos 1-3) y expandiendo funcionalidad progresivamente.
+El plan sigue un **enfoque modular incremental**: primero se completa toda la funcionalidad end-to-end con el Módulo 1, luego se agregan módulos adicionales uno por uno. Esto permite validar el sistema completo con un módulo antes de escalar.
 
 ## Stack Tecnológico
 
@@ -17,7 +17,7 @@ El plan sigue un enfoque de entrega incremental en 4 fases, comenzando con el MV
 
 ## Tareas
 
-### Fase 1: MVP - Infraestructura y Módulos 1-3
+### Fase 1: Infraestructura Base (COMPLETADA)
 
 - [x] 1. Configuración inicial del proyecto
   - [x] 1.1 Crear estructura del proyecto Next.js con TypeScript
@@ -441,15 +441,357 @@ El plan sigue un enfoque de entrega incremental en 4 fases, comenzando con el MV
     - _Requisitos: 16.1, 16.2, 16.3_
 
 
-- [x] 19. Checkpoint - Verificar MVP funcional
-  - Verificar que todos los componentes del MVP funcionan correctamente
+- [x] 19. Checkpoint - Verificar infraestructura base funcional
+  - Verificar que todos los componentes de infraestructura funcionan correctamente
   - Ejecutar suite completa de tests
   - Validar flujo completo: registro → laboratorio → ejercicios → entrega
   - Asegurar que todos los tests pasan, preguntar al usuario si surgen dudas
 
-### Fase 2: Módulos 4-5 y Funcionalidades Avanzadas
+### Fase 2: Módulo 1 Completo End-to-End
 
-- [ ] 20. Proxy backend para yfinance
+- [ ] 20. Integración completa del Módulo 1
+  - [ ] 20.1 Verificar contenido del Módulo 1 en base de datos
+    - Validar que las 4 lecciones están en la base de datos
+    - Validar que los ejercicios están correctamente vinculados
+    - Verificar que los casos de prueba funcionan
+    - _Requisitos: 17.1, 17.2_
+  
+  - [ ] 20.2 Implementar navegación completa del Módulo 1
+    - Navegación entre lecciones del módulo
+    - Indicadores de progreso por lección
+    - Bloqueo de lecciones hasta completar anteriores (opcional)
+    - _Requisitos: 17.1, 35.3_
+  
+  - [ ] 20.3 Integrar ejercicios con sistema de progreso
+    - Actualizar progreso al completar ejercicios
+    - Calcular porcentaje de completación del módulo
+    - Mostrar estadísticas de ejercicios (completados/total)
+    - _Requisitos: 6.4, 35.3, 35.4_
+  
+  - [ ] 20.4 Implementar sistema de insignias para Módulo 1
+    - Insignia "Primera Ejecución"
+    - Insignia "Primer Ejercicio Completado"
+    - Insignia "Módulo 1 Completado"
+    - Otorgamiento automático de insignias
+    - _Requisitos: 35.5, 35.6_
+  
+  - [ ] 20.5 Crear dashboard de progreso del Módulo 1
+    - Vista de progreso general del módulo
+    - Lista de lecciones con estado
+    - Lista de ejercicios con estado
+    - Insignias ganadas
+    - _Requisitos: 35.3, 35.4, 35.5_
+
+- [ ] 21. Tests de validación del Módulo 1
+  - [ ]* 21.1 Escribir tests E2E para flujo completo del Módulo 1
+    - Test de navegación por todas las lecciones
+    - Test de completar todos los ejercicios
+    - Test de actualización de progreso
+    - Test de otorgamiento de insignias
+  
+  - [ ]* 21.2 Escribir tests de integración para Módulo 1
+    - Test de carga de contenido desde base de datos
+    - Test de validación de ejercicios
+    - Test de cálculo de progreso
+    - Test de sistema de insignias
+
+- [ ] 22. Checkpoint - Módulo 1 completamente funcional
+  - Verificar que todas las lecciones del Módulo 1 se cargan correctamente
+  - Completar manualmente todos los ejercicios del Módulo 1
+  - Verificar que el progreso se actualiza correctamente
+  - Verificar que las insignias se otorgan correctamente
+  - Validar que el sistema está listo para agregar más módulos
+  - Asegurar que todos los tests pasan, preguntar al usuario si surgen dudas
+
+### Fase 3: Módulo 2 - Estructuras de Datos
+
+- [ ] 23. Integración completa del Módulo 2
+  - [ ] 23.1 Verificar contenido del Módulo 2 en base de datos
+    - Validar que las 4 lecciones están en la base de datos
+    - Validar que los ejercicios están correctamente vinculados
+    - Verificar que los casos de prueba funcionan
+    - _Requisitos: 18.1, 18.2_
+  
+  - [ ] 23.2 Integrar Módulo 2 con sistema de navegación
+    - Agregar Módulo 2 al menú de navegación
+    - Implementar desbloqueo del Módulo 2 al completar Módulo 1
+    - Actualizar indicadores de progreso
+    - _Requisitos: 18.1, 35.3_
+  
+  - [ ] 23.3 Crear ejercicios avanzados de estructuras de datos
+    - Ejercicios de manipulación de listas y tuplas
+    - Ejercicios de diccionarios y sets
+    - Ejercicios de comprensiones de listas
+    - Ejercicios de manipulación de strings
+    - _Requisitos: 18.1, 18.2_
+  
+  - [ ] 23.4 Implementar insignias específicas del Módulo 2
+    - Insignia "Maestro de Listas"
+    - Insignia "Experto en Diccionarios"
+    - Insignia "Módulo 2 Completado"
+    - _Requisitos: 35.5, 35.6_
+
+- [ ] 24. Checkpoint - Módulo 2 completamente funcional
+  - Verificar que todas las lecciones del Módulo 2 se cargan correctamente
+  - Completar manualmente ejercicios representativos del Módulo 2
+  - Verificar que el progreso se actualiza para ambos módulos
+  - Verificar que las insignias del Módulo 2 se otorgan correctamente
+  - Asegurar que todos los tests pasan, preguntar al usuario si surgen dudas
+
+### Fase 4: Módulo 3 - Introducción a Pandas
+
+- [ ] 25. Integración completa del Módulo 3
+  - [ ] 25.1 Verificar contenido del Módulo 3 en base de datos
+    - Validar que las 4 lecciones están en la base de datos
+    - Validar que los ejercicios están correctamente vinculados
+    - Verificar que Pandas funciona correctamente en Pyodide
+    - _Requisitos: 19.1, 19.2_
+  
+  - [ ] 25.2 Integrar Módulo 3 con sistema de navegación
+    - Agregar Módulo 3 al menú de navegación
+    - Implementar desbloqueo del Módulo 3 al completar Módulo 2
+    - Actualizar indicadores de progreso
+    - _Requisitos: 19.1, 35.3_
+  
+  - [ ] 25.3 Crear ejercicios de Pandas con datasets financieros
+    - Ejercicios de DataFrames y Series
+    - Ejercicios de lectura y escritura de datos
+    - Ejercicios de filtrado y selección
+    - Ejercicios de operaciones básicas
+    - Incluir datasets financieros simples
+    - _Requisitos: 19.1, 19.2_
+  
+  - [ ] 25.4 Implementar insignias específicas del Módulo 3
+    - Insignia "Primer DataFrame"
+    - Insignia "Analista de Datos"
+    - Insignia "Módulo 3 Completado"
+    - _Requisitos: 35.5, 35.6_
+  
+  - [ ] 25.5 Preparar especificación del Trabajo 1
+    - Definir requisitos del proyecto (análisis con Pandas)
+    - Crear rúbrica de evaluación
+    - Establecer fecha de entrega (semana 6)
+    - Implementar validación específica para Trabajo 1
+    - _Requisitos: 10.1, 10.2, 16.1, 16.2, 16.3, 33.14_
+
+- [ ] 26. Checkpoint - Módulo 3 completamente funcional y Trabajo 1 listo
+  - Verificar que todas las lecciones del Módulo 3 se cargan correctamente
+  - Completar manualmente ejercicios representativos del Módulo 3
+  - Verificar que Pandas funciona correctamente en el navegador
+  - Probar el flujo completo de entrega del Trabajo 1
+  - Verificar que el sistema de calificación funciona para Trabajo 1
+  - Asegurar que todos los tests pasan, preguntar al usuario si surgen dudas
+
+### Fase 5: Módulo 4 - Obtención de Datos Financieros
+
+- [ ] 27. Proxy backend para yfinance
+  - [ ] 27.1 Implementar endpoints de proxy para yfinance
+    - POST /api/proxy/yfinance/download - Descargar datos históricos
+    - GET /api/proxy/yfinance/info/{ticker} - Información de acción
+    - Implementar manejo de errores y retry logic
+    - Agregar caching de datos (1 hora)
+    - _Requisitos: 20.1, 20.2, 20.3_
+  
+  - [ ] 27.2 Integrar proxy con Pyodide
+    - Modificar Pyodide para usar proxy en lugar de llamadas directas
+    - Implementar función helper en Python para llamar al proxy
+    - Manejar errores de red
+    - _Requisitos: 20.1, 20.2_
+
+- [ ] 28. Integración completa del Módulo 4
+  - [ ] 28.1 Crear contenido del Módulo 4
+    - Lección 4.1: Introducción a yfinance
+    - Lección 4.2: Descarga de datos históricos
+    - Lección 4.3: Información de empresas
+    - Lección 4.4: Múltiples activos
+    - Migrar contenido a base de datos
+    - _Requisitos: 20.1, 20.2_
+  
+  - [ ] 28.2 Crear ejercicios del Módulo 4 con datos reales
+    - Ejercicios de descarga de datos del sector bancario
+    - Análisis de precios históricos
+    - Comparación de múltiples activos
+    - Incluir casos de prueba con datos reales
+    - _Requisitos: 20.1, 20.2_
+  
+  - [ ] 28.3 Integrar Módulo 4 con sistema de navegación
+    - Agregar Módulo 4 al menú de navegación
+    - Implementar desbloqueo del Módulo 4 al completar Módulo 3
+    - Actualizar indicadores de progreso
+    - _Requisitos: 20.1, 35.3_
+  
+  - [ ] 28.4 Implementar insignias específicas del Módulo 4
+    - Insignia "Primera Descarga de Datos"
+    - Insignia "Analista Financiero"
+    - Insignia "Módulo 4 Completado"
+    - _Requisitos: 35.5, 35.6_
+
+- [ ] 29. Checkpoint - Módulo 4 completamente funcional
+  - Verificar que el proxy de yfinance funciona correctamente
+  - Verificar que todas las lecciones del Módulo 4 se cargan correctamente
+  - Completar manualmente ejercicios con datos financieros reales
+  - Verificar que el caching de datos funciona
+  - Asegurar que todos los tests pasan, preguntar al usuario si surgen dudas
+
+### Fase 6: Módulo 5 - Visualización de Datos
+
+- [ ] 30. Integración completa del Módulo 5
+  - [ ] 30.1 Crear contenido del Módulo 5
+    - Lección 5.1: Gráficos básicos con matplotlib
+    - Lección 5.2: Gráficos financieros (candlestick, OHLC)
+    - Lección 5.3: Múltiples subplots
+    - Lección 5.4: Personalización de gráficos
+    - Migrar contenido a base de datos
+    - _Requisitos: 21.1, 21.2_
+  
+  - [ ] 30.2 Crear ejercicios del Módulo 5 con visualizaciones
+    - Ejercicios de visualización de precios
+    - Gráficos de rendimientos
+    - Comparación visual de activos
+    - Gráficos financieros avanzados
+    - _Requisitos: 21.1, 21.2_
+  
+  - [ ] 30.3 Integrar Módulo 5 con sistema de navegación
+    - Agregar Módulo 5 al menú de navegación
+    - Implementar desbloqueo del Módulo 5 al completar Módulo 4
+    - Actualizar indicadores de progreso
+    - _Requisitos: 21.1, 35.3_
+  
+  - [ ] 30.4 Implementar insignias específicas del Módulo 5
+    - Insignia "Primera Visualización"
+    - Insignia "Maestro de Gráficos"
+    - Insignia "Módulo 5 Completado"
+    - _Requisitos: 35.5, 35.6_
+  
+  - [ ] 30.5 Preparar especificación del Trabajo 2
+    - Definir requisitos del proyecto (análisis con yfinance + visualizaciones)
+    - Crear rúbrica de evaluación
+    - Establecer fecha de entrega (semana 11)
+    - Implementar validación específica para Trabajo 2
+    - _Requisitos: 10.1, 10.2, 16.1, 16.2, 16.3, 33.14_
+
+- [ ] 31. Checkpoint - Módulo 5 completamente funcional y Trabajo 2 listo
+  - Verificar que matplotlib funciona correctamente en el navegador
+  - Verificar que todas las lecciones del Módulo 5 se cargan correctamente
+  - Completar manualmente ejercicios con visualizaciones
+  - Probar el flujo completo de entrega del Trabajo 2
+  - Asegurar que todos los tests pasan, preguntar al usuario si surgen dudas
+
+### Fase 7: Módulo 6 - Análisis Financiero Básico
+
+- [ ] 32. Integración completa del Módulo 6
+  - [ ] 32.1 Crear contenido del Módulo 6
+    - Lección 6.1: Rendimientos y volatilidad
+    - Lección 6.2: Medias móviles
+    - Lección 6.3: Indicadores técnicos básicos
+    - Lección 6.4: Correlaciones entre activos
+    - Migrar contenido a base de datos
+    - _Requisitos: 22.1, 22.2_
+  
+  - [ ] 32.2 Crear ejercicios del Módulo 6
+    - Cálculo de rendimientos
+    - Análisis de volatilidad
+    - Implementación de indicadores técnicos
+    - Análisis de correlaciones
+    - _Requisitos: 22.1, 22.2_
+  
+  - [ ] 32.3 Integrar Módulo 6 con sistema de navegación
+    - Agregar Módulo 6 al menú de navegación
+    - Implementar desbloqueo del Módulo 6 al completar Módulo 5
+    - Actualizar indicadores de progreso
+    - _Requisitos: 22.1, 35.3_
+  
+  - [ ] 32.4 Implementar insignias específicas del Módulo 6
+    - Insignia "Analista de Riesgo"
+    - Insignia "Experto en Indicadores"
+    - Insignia "Módulo 6 Completado"
+    - _Requisitos: 35.5, 35.6_
+
+- [ ] 33. Checkpoint - Módulo 6 completamente funcional
+  - Verificar que todas las lecciones del Módulo 6 se cargan correctamente
+  - Completar manualmente ejercicios de análisis financiero
+  - Verificar cálculos de rendimientos y volatilidad
+  - Asegurar que todos los tests pasan, preguntar al usuario si surgen dudas
+
+### Fase 8: Módulo 7 - Análisis de Portafolios
+
+- [ ] 34. Integración completa del Módulo 7
+  - [ ] 34.1 Crear contenido del Módulo 7
+    - Lección 7.1: Construcción de portafolios
+    - Lección 7.2: Diversificación
+    - Lección 7.3: Frontera eficiente
+    - Lección 7.4: Optimización de portafolios
+    - Migrar contenido a base de datos
+    - _Requisitos: 23.1, 23.2_
+  
+  - [ ] 34.2 Crear ejercicios del Módulo 7
+    - Construcción de portafolios
+    - Cálculo de métricas de riesgo
+    - Optimización simple de portafolios
+    - Análisis de diversificación
+    - _Requisitos: 23.1, 23.2_
+  
+  - [ ] 34.3 Integrar Módulo 7 con sistema de navegación
+    - Agregar Módulo 7 al menú de navegación
+    - Implementar desbloqueo del Módulo 7 al completar Módulo 6
+    - Actualizar indicadores de progreso
+    - _Requisitos: 23.1, 35.3_
+  
+  - [ ] 34.4 Implementar insignias específicas del Módulo 7
+    - Insignia "Constructor de Portafolios"
+    - Insignia "Optimizador"
+    - Insignia "Módulo 7 Completado"
+    - _Requisitos: 35.5, 35.6_
+
+- [ ] 35. Checkpoint - Módulo 7 completamente funcional
+  - Verificar que todas las lecciones del Módulo 7 se cargan correctamente
+  - Completar manualmente ejercicios de portafolios
+  - Verificar cálculos de optimización
+  - Asegurar que todos los tests pasan, preguntar al usuario si surgen dudas
+
+### Fase 9: Módulo 8 - Proyecto Final
+
+- [ ] 36. Integración completa del Módulo 8
+  - [ ] 36.1 Crear especificación del proyecto final
+    - Definir alcance del proyecto
+    - Crear rúbrica detallada
+    - Establecer hitos intermedios
+    - Crear guías y recursos
+    - _Requisitos: 24.1, 24.2_
+  
+  - [ ] 36.2 Crear contenido del Módulo 8
+    - Lección 8.1: Planificación del proyecto
+    - Lección 8.2: Metodología de análisis
+    - Lección 8.3: Presentación de resultados
+    - Lección 8.4: Mejores prácticas
+    - Migrar contenido a base de datos
+    - _Requisitos: 24.1, 24.2_
+  
+  - [ ] 36.3 Integrar Módulo 8 con sistema de navegación
+    - Agregar Módulo 8 al menú de navegación
+    - Implementar desbloqueo del Módulo 8 al completar Módulo 7
+    - Actualizar indicadores de progreso
+    - _Requisitos: 24.1, 35.3_
+  
+  - [ ] 36.4 Implementar sistema de entrega del proyecto final
+    - Validación específica para proyecto final
+    - Sistema de revisión por pares (opcional)
+    - Rúbrica de evaluación automatizada
+    - _Requisitos: 10.1, 10.2, 24.1, 24.2_
+  
+  - [ ] 36.5 Implementar insignias finales
+    - Insignia "Proyecto Final Completado"
+    - Insignia "Graduado"
+    - Insignia "Maestro de Python Financiero"
+    - _Requisitos: 35.5, 35.6_
+
+- [ ] 37. Checkpoint - Módulo 8 completamente funcional
+  - Verificar que todas las lecciones del Módulo 8 se cargan correctamente
+  - Probar el flujo completo de entrega del proyecto final
+  - Verificar que la rúbrica de evaluación funciona
+  - Asegurar que todos los tests pasan, preguntar al usuario si surgen dudas
+
+### Fase 10: Funcionalidades Avanzadas y Optimización
   - [ ] 20.1 Implementar endpoints de proxy para yfinance
     - POST /api/proxy/yfinance/download - Descargar datos históricos
     - GET /api/proxy/yfinance/info/{ticker} - Información de acción
@@ -967,11 +1309,21 @@ Los checkpoints están distribuidos estratégicamente al final de cada fase para
 
 ### Estrategia de Implementación
 
-1. **Incremental**: Cada tarea construye sobre las anteriores
-2. **Validación temprana**: Los tests se ejecutan cerca de la implementación
-3. **Checkpoints frecuentes**: Validación al final de cada fase
-4. **Enfoque en MVP**: Fase 1 contiene todas las funcionalidades críticas
-5. **Expansión progresiva**: Fases 2-4 agregan funcionalidades avanzadas
+Este plan sigue un **enfoque modular incremental** en lugar del enfoque tradicional de fases grandes:
+
+1. **Modular**: Cada módulo se completa end-to-end antes de agregar el siguiente
+2. **Validación temprana**: Cada módulo se valida completamente antes de continuar
+3. **Checkpoints frecuentes**: Validación al final de cada módulo
+4. **Infraestructura primero**: Fase 1 establece toda la infraestructura base
+5. **Un módulo a la vez**: Fases 2-9 agregan módulos uno por uno
+6. **Funcionalidades avanzadas al final**: Fase 10 agrega características nice-to-have
+
+**Ventajas de este enfoque:**
+- Permite validar el sistema completo con un módulo antes de escalar
+- Reduce el riesgo de problemas arquitectónicos descubiertos tarde
+- Facilita la demostración de progreso incremental
+- Permite ajustar el diseño basado en aprendizajes de módulos anteriores
+- Cada checkpoint valida un sistema funcional completo (no solo componentes aislados)
 
 ### Contexto Disponible Durante Implementación
 
@@ -1010,25 +1362,39 @@ Por lo tanto, las tareas no incluyen detalles de implementación excesivos que y
 
 ### Estimación de Esfuerzo
 
-- **Fase 1 (MVP)**: ~40-50 horas de desarrollo
-- **Fase 2**: ~20-25 horas de desarrollo
-- **Fase 3**: ~20-25 horas de desarrollo
-- **Fase 4**: ~30-35 horas de desarrollo
-- **Total**: ~110-135 horas de desarrollo
+- **Fase 1 (Infraestructura Base)**: ~40-50 horas - COMPLETADA
+- **Fase 2 (Módulo 1)**: ~8-10 horas de desarrollo
+- **Fase 3 (Módulo 2)**: ~6-8 horas de desarrollo
+- **Fase 4 (Módulo 3)**: ~8-10 horas de desarrollo
+- **Fase 5 (Módulo 4)**: ~10-12 horas de desarrollo
+- **Fase 6 (Módulo 5)**: ~8-10 horas de desarrollo
+- **Fase 7 (Módulo 6)**: ~6-8 horas de desarrollo
+- **Fase 8 (Módulo 7)**: ~6-8 horas de desarrollo
+- **Fase 9 (Módulo 8)**: ~8-10 horas de desarrollo
+- **Fase 10 (Funcionalidades Avanzadas)**: ~30-40 horas de desarrollo
+- **Total**: ~130-165 horas de desarrollo
 
 ### Orden de Prioridad
 
 Si se necesita reducir el alcance, las fases tienen la siguiente prioridad:
 
-1. **Crítico (Fase 1)**: MVP funcional con módulos 1-3
-2. **Alta (Fase 2)**: Módulos 4-5 con datos financieros reales
-3. **Media (Fase 3)**: Análisis avanzado y herramientas adicionales
-4. **Baja (Fase 4)**: Funcionalidades nice-to-have
+1. **Crítico (Fases 1-4)**: Infraestructura + Módulos 1-3 (fundamentos de Python y Pandas)
+2. **Alta (Fases 5-6)**: Módulos 4-5 (datos financieros reales y visualización)
+3. **Media (Fases 7-9)**: Módulos 6-8 (análisis avanzado y proyecto final)
+4. **Baja (Fase 10)**: Funcionalidades nice-to-have (comparación Python/R, calculadoras, etc.)
 
 ## Conclusión
 
-Este plan de implementación proporciona una ruta clara y estructurada para construir la Plataforma Educativa de Python para Análisis Financiero. Siguiendo el enfoque incremental de 4 fases, se puede entregar valor temprano con el MVP y expandir funcionalidad progresivamente.
+Este plan de implementación proporciona una ruta clara y estructurada para construir la Plataforma Educativa de Python para Análisis Financiero siguiendo un **enfoque modular incremental**.
 
-Cada tarea está diseñada para ser discreta, manejable y construir sobre las anteriores. Los checkpoints aseguran validación continua, y las referencias a requisitos mantienen trazabilidad completa.
+En lugar de implementar múltiples módulos en paralelo, este plan asegura que cada módulo esté completamente funcional end-to-end antes de agregar el siguiente. Esto permite:
+
+- **Validación temprana**: Cada módulo se prueba completamente en el contexto del sistema completo
+- **Reducción de riesgo**: Los problemas arquitectónicos se descubren temprano con el Módulo 1
+- **Progreso demostrable**: Cada checkpoint entrega un sistema funcional completo
+- **Flexibilidad**: Fácil ajustar el diseño basado en aprendizajes de módulos anteriores
+- **Priorización clara**: Los módulos críticos (1-3) se completan primero
+
+Cada tarea está diseñada para ser discreta, manejable y construir sobre las anteriores. Los checkpoints aseguran validación continua después de cada módulo, y las referencias a requisitos mantienen trazabilidad completa.
 
 El sistema resultante será una plataforma educativa moderna, escalable y optimizada para usar servicios gratuitos, capaz de soportar 30-50 estudiantes concurrentes por semestre.

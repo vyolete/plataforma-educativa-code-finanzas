@@ -1,0 +1,138 @@
+# Implementation Plan
+
+- [ ] 1. Write bug condition exploration test
+  - **Property 1: Fault Condition** - Static Import Build Failure
+  - **CRITICAL**: This test MUST FAIL on unfixed code - failure confirms the bug exists
+  - **DO NOT attempt to fix the test or the code when it fails**
+  - **NOTE**: This test encodes the expected behavior - it will validate the fix when it passes after implementation
+  - **GOAL**: Surface counterexamples that demonstrate the bug exists
+  - **Scoped PBT Approach**: For deterministic bugs, scope the property to the concrete failing case(s) to ensure reproducibility
+  - Create test file `frontend/src/components/laboratory/__tests__/api-integration.test.tsx`
+  - Test that ContentPanel imports from `@/data/lessons` (static import - causes build issues)
+  - Test that ExercisesPanel imports from `@/data/exercises` (static import - causes build issues)
+  - Test that Vercel build processes large static content files (>2660 lines)
+  - Run test on UNFIXED code
+  - **EXPECTED OUTCOME**: Test FAILS (this is correct - it proves the bug exists)
+  - Document counterexamples: "ContentPanel uses static import causing Vercel build to process 2660+ lines"
+  - Mark task complete when test is written, run, and failure is documented
+  - _Requirements: 1.1, 1.2, 1.3, 1.4_
+
+- [ ] 2. Write preservation property tests (BEFORE implementing fix)
+  - **Property 2: Preservation** - UI Functionality Preservation
+  - **IMPORTANT**: Follow observation-first methodology
+  - Observe behavior on UNFIXED code for non-buggy inputs
+  - Create test file `frontend/src/components/laboratory/__tests__/ui-preservation.test.tsx`
+  - Test that ContentPanel renders markdown with syntax highlighting (observe on unfixed code)
+  - Test that ContentPanel Previous/Next navigation works correctly (observe on unfixed code)
+  - Test that ExercisesPanel displays completion status and difficulty badges (observe on unfixed code)
+  - Test that ExercisesPanel integrates with ExerciseContext (observe on unfixed code)
+  - Test that 4-panel laboratory layout remains functional (observe on unfixed code)
+  - Test that error messages display when data is unavailable (observe on unfixed code)
+  - Test that development mode hot reload works (observe on unfixed code)
+  - Run tests on UNFIXED code
+  - **EXPECTED OUTCOME**: Tests PASS (this confirms baseline behavior to preserve)
+  - Mark task complete when tests are written, run, and passing on unfixed code
+  - _Requirements: 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7_
+
+- [-] 3. Fix for Módulo 1 Supabase Integration
+
+  - [x] 3.1 Update ContentPanel to use Supabase API
+    - Replace static import `import { getLessonById, getLessonsByModule } from '@/data/lessons'` with API import `import { getLessonById, getLessonsByModule } from '@/lib/api/lessons'`
+    - Convert component to async data fetching using React hooks (useState, useEffect)
+    - Add loading states while fetching lesson data
+    - Add error handling for API failures with user-friendly messages
+    - Maintain existing markdown rendering with ReactMarkdown, remarkGfm, and rehypeHighlight
+    - Preserve Previous/Next navigation functionality
+    - Preserve custom styling for code blocks, headings, paragraphs, lists, links, blockquotes
+    - Test that lesson content displays correctly from API
+    - _Bug_Condition: isBugCondition(input) where input.component = ContentPanel AND input.dataSource = staticImport_
+    - _Expected_Behavior: component fetches data from API using getLessonById() and getLessonsByModule()_
+    - _Preservation: Markdown rendering, navigation, custom styling, error messages (Requirements 3.1, 3.2, 3.6)_
+    - _Requirements: 1.1, 2.1, 3.1, 3.2, 3.6_
+
+  - [ ] 3.2 Update ExercisesPanel to use Supabase API
+    - Replace static import `import { getExercisesByModule } from '@/data/exercises'` with API import
+    - Create API client file `frontend/src/lib/api/exercises.ts` if it doesn't exist
+    - Implement `getExercisesByModule(moduleId: number)` function calling `/api/exercises/module/${moduleId}`
+    - Convert component to async data fetching using React hooks
+    - Add loading states while fetching exercise data
+    - Add error handling for API failures
+    - Maintain existing completion tracking with ExerciseContext
+    - Preserve difficulty badges, progress bars, and ExerciseView integration
+    - Test that exercises display correctly from API
+    - _Bug_Condition: isBugCondition(input) where input.component = ExercisesPanel AND input.dataSource = staticImport_
+    - _Expected_Behavior: component fetches data from API using getExercisesByModule()_
+    - _Preservation: Completion status, difficulty badges, progress tracking, ExerciseContext integration (Requirements 3.3, 3.4, 3.6)_
+    - _Requirements: 1.2, 2.2, 3.3, 3.4, 3.6_
+
+  - [ ] 3.3 Create next.config.js with build optimizations
+    - Create `frontend/next.config.js` file
+    - Add webpack configuration to exclude large static data files from build
+    - Add optimization for production builds
+    - Configure external data fetching to reduce bundle size
+    - Add configuration: `experimental: { optimizePackageImports: ['@/data'] }`
+    - Test that build completes in <3 minutes
+    - _Bug_Condition: isBugCondition(input) where input.buildConfig = missing AND input.staticContent > 2660 lines_
+    - _Expected_Behavior: Next.js uses optimized configuration reducing build time to <3 minutes_
+    - _Preservation: Development mode hot reload functionality (Requirement 3.7)_
+    - _Requirements: 1.3, 1.6, 2.3, 2.6, 3.7_
+
+  - [ ] 3.4 Add 30-second timeout to Pyodide worker
+    - Update `frontend/src/workers/pyodide.worker.ts`
+    - Add timeout mechanism to `executeCode()` function
+    - Implement Promise.race() with 30-second timeout
+    - Return timeout error message: "Code execution exceeded 30 seconds and was terminated"
+    - Clean up Pyodide state after timeout
+    - Test with infinite loop: `while True: pass`
+    - Verify timeout triggers at 30 seconds
+    - _Bug_Condition: isBugCondition(input) where input.codeExecution = infinite AND input.timeout = none_
+    - _Expected_Behavior: worker enforces 30-second timeout preventing infinite execution_
+    - _Preservation: Normal code execution for non-infinite cases completes successfully_
+    - _Requirements: 1.5, 2.5_
+
+  - [ ] 3.5 Verify Vercel deployment works
+    - Test local production build: `npm run build`
+    - Verify build completes successfully in <3 minutes
+    - Check that no static data files are processed during build
+    - Verify that API calls work in production mode
+    - Test deployed application on Vercel
+    - Confirm lesson and exercise data loads from Supabase API
+    - _Bug_Condition: isBugCondition(input) where input.deployment = Vercel AND input.staticContent > 2660 lines_
+    - _Expected_Behavior: Vercel deployment succeeds with dynamic API data loading_
+    - _Preservation: All UI functionality remains intact after deployment_
+    - _Requirements: 1.3, 1.4, 2.3, 2.4, 3.5_
+
+  - [ ] 3.6 Verify bug condition exploration test now passes
+    - **Property 1: Expected Behavior** - API Integration Success
+    - **IMPORTANT**: Re-run the SAME test from task 1 - do NOT write a new test
+    - The test from task 1 encodes the expected behavior
+    - When this test passes, it confirms the expected behavior is satisfied
+    - Run bug condition exploration test from step 1
+    - Verify ContentPanel uses API import instead of static import
+    - Verify ExercisesPanel uses API import instead of static import
+    - Verify Vercel build does not process large static content
+    - **EXPECTED OUTCOME**: Test PASSES (confirms bug is fixed)
+    - _Requirements: 2.1, 2.2, 2.3, 2.4, 2.5, 2.6_
+
+  - [ ] 3.7 Verify preservation tests still pass
+    - **Property 2: Preservation** - UI Functionality Preserved
+    - **IMPORTANT**: Re-run the SAME tests from task 2 - do NOT write new tests
+    - Run preservation property tests from step 2
+    - Verify markdown rendering with syntax highlighting works
+    - Verify Previous/Next navigation works
+    - Verify completion status and difficulty badges display
+    - Verify ExerciseContext integration works
+    - Verify 4-panel layout remains functional
+    - Verify error messages display correctly
+    - Verify development mode hot reload works
+    - **EXPECTED OUTCOME**: Tests PASS (confirms no regressions)
+    - Confirm all tests still pass after fix (no regressions)
+
+- [ ] 4. Checkpoint - Ensure all tests pass
+  - Run all tests: `npm test`
+  - Verify ContentPanel loads lessons from API
+  - Verify ExercisesPanel loads exercises from API
+  - Verify Pyodide worker enforces 30-second timeout
+  - Verify Vercel build completes successfully
+  - Verify all UI functionality preserved
+  - Ask the user if questions arise
