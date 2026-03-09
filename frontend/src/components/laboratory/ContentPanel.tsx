@@ -4,7 +4,8 @@ import { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeHighlight from 'rehype-highlight';
-import { getLessonById, getLessonsByModule, type Lesson } from '@/data/lessons';
+import { getLessonById, getLessonsByModule } from '@/lib/api/lessons';
+import type { Lesson, LessonDetail } from '@/types/lesson';
 import 'highlight.js/styles/github-dark.css';
 
 interface ContentPanelProps {
@@ -12,35 +13,74 @@ interface ContentPanelProps {
   lessonId?: string;
 }
 
-export default function ContentPanel({ moduleId = '1', lessonId = '1-1' }: ContentPanelProps) {
-  const [currentLesson, setCurrentLesson] = useState<Lesson | undefined>();
+export default function ContentPanel({ moduleId = '1', lessonId = '1' }: ContentPanelProps) {
+  const [currentLesson, setCurrentLesson] = useState<LessonDetail | undefined>();
   const [moduleLessons, setModuleLessons] = useState<Lesson[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // Load current lesson
-    const lesson = getLessonById(lessonId);
-    setCurrentLesson(lesson);
+    const fetchLessonData = async () => {
+      setIsLoading(true);
+      setError(null);
+      try {
+        // TODO: Uncomment when API is ready
+        // const lessonData = await getLessonById(Number(lessonId));
+        // setCurrentLesson(lessonData);
+        // if (moduleId) {
+        //   const lessonsData = await getLessonsByModule(Number(moduleId));
+        //   setModuleLessons(lessonsData);
+        // }
+        
+        // Temporary: Show placeholder until API is connected
+        setCurrentLesson({
+          id: Number(lessonId),
+          module_id: Number(moduleId),
+          title: 'Lección de ejemplo',
+          content: '# Bienvenido\n\nEsta es una lección de ejemplo. La API se conectará pronto.',
+          code_template: null,
+          order_index: 1,
+          created_at: new Date().toISOString(),
+          content_blocks: [],
+          objectives: []
+        });
+        setModuleLessons([]);
+      } catch (err) {
+        console.error('Error loading lesson:', err);
+        setError('Error al cargar la lección');
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-    // Load all lessons for the module
-    if (moduleId) {
-      const lessons = getLessonsByModule(moduleId);
-      setModuleLessons(lessons);
-    }
+    fetchLessonData();
   }, [moduleId, lessonId]);
 
-  const handlePreviousLesson = () => {
+  const handlePreviousLesson = async () => {
     if (!currentLesson) return;
     const currentIndex = moduleLessons.findIndex(l => l.id === currentLesson.id);
     if (currentIndex > 0) {
-      setCurrentLesson(moduleLessons[currentIndex - 1]);
+      const prevLesson = moduleLessons[currentIndex - 1];
+      try {
+        const lessonData = await getLessonById(prevLesson.id);
+        setCurrentLesson(lessonData);
+      } catch (err) {
+        console.error('Error loading previous lesson:', err);
+      }
     }
   };
 
-  const handleNextLesson = () => {
+  const handleNextLesson = async () => {
     if (!currentLesson) return;
     const currentIndex = moduleLessons.findIndex(l => l.id === currentLesson.id);
     if (currentIndex < moduleLessons.length - 1) {
-      setCurrentLesson(moduleLessons[currentIndex + 1]);
+      const nextLesson = moduleLessons[currentIndex + 1];
+      try {
+        const lessonData = await getLessonById(nextLesson.id);
+        setCurrentLesson(lessonData);
+      } catch (err) {
+        console.error('Error loading next lesson:', err);
+      }
     }
   };
 
@@ -57,14 +97,29 @@ export default function ContentPanel({ moduleId = '1', lessonId = '1-1' }: Conte
         <h2 className="text-lg font-semibold text-blue-400">Contenido</h2>
         {currentLesson && (
           <p className="text-sm text-gray-400 mt-1">
-            Módulo {currentLesson.moduleId} - {currentLesson.title}
+            Módulo {currentLesson.module_id} - {currentLesson.title}
           </p>
         )}
       </div>
 
       {/* Content Area */}
       <div className="flex-1 overflow-y-auto p-6">
-        {currentLesson ? (
+        {isLoading ? (
+          <div className="text-center text-gray-400 mt-8">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-400 mx-auto mb-2"></div>
+            <p>Cargando lección...</p>
+          </div>
+        ) : error ? (
+          <div className="text-center text-red-400 mt-8">
+            <p>{error}</p>
+            <button 
+              onClick={() => window.location.reload()}
+              className="text-sm mt-2 text-blue-400 hover:text-blue-300"
+            >
+              Reintentar
+            </button>
+          </div>
+        ) : currentLesson ? (
           <div className="prose prose-invert max-w-none">
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}

@@ -1,138 +1,86 @@
 /**
  * API client for exercise-related endpoints
+ * Provides functions to fetch exercise data from the backend API
  */
 
 import { apiClient } from './client';
 
-export interface TestCase {
-  input: string;
-  expectedOutput: string;
-  description: string;
-}
-
 export interface Exercise {
-  id: number;
-  moduleId: number;
-  lessonId?: number;
+  id: string;
+  moduleId: string;
+  lessonId: string;
   title: string;
   description: string;
   difficulty: 'beginner' | 'intermediate' | 'advanced';
-  starterCode?: string;
-  testCases: TestCase[];
-  hints?: string[];
-  points: number;
-  createdAt: string;
-}
-
-export interface ExerciseSubmission {
-  id: number;
-  exerciseId: number;
-  userId: number;
-  code: string;
-  status: 'correct' | 'incorrect' | 'pending';
-  output?: string;
-  submittedAt: string;
-  executionTimeMs?: number;
-}
-
-export interface SubmitExerciseData {
-  code: string;
-}
-
-export interface UpdateSubmissionData {
-  status: 'correct' | 'incorrect' | 'pending';
-  output?: string;
-  executionTimeMs?: number;
+  xpReward: number;
+  starterCode: string;
+  solution: string;
+  hints: string[];
+  testCases: {
+    input?: string;
+    expectedOutput: string;
+    description: string;
+  }[];
+  tags: string[];
 }
 
 /**
- * Get all exercises for a module
+ * Get all exercises for a specific module
+ * Returns exercises ordered by lesson and difficulty
+ * 
+ * @param moduleId - ID of the module to fetch exercises for
+ * @returns Promise<Exercise[]> Array of exercises for the module
+ * @throws Error if the API request fails or no exercises found
  */
-export async function getExercisesByModule(moduleId: number): Promise<Exercise[]> {
-  const response = await apiClient.get(`/exercises/module/${moduleId}`);
-  return response.data;
+export async function getExercisesByModule(moduleId: string): Promise<Exercise[]> {
+  try {
+    return await apiClient.get<Exercise[]>(`/api/exercises/module/${moduleId}`);
+  } catch (error) {
+    console.error(`Error fetching exercises for module ${moduleId}:`, error);
+    throw new Error(
+      error instanceof Error 
+        ? error.message 
+        : `Failed to fetch exercises for module ${moduleId}`
+    );
+  }
 }
 
 /**
  * Get a specific exercise by ID
+ * 
+ * @param exerciseId - ID of the exercise to fetch
+ * @returns Promise<Exercise> Exercise details
+ * @throws Error if the API request fails or exercise not found
  */
-export async function getExercise(exerciseId: number): Promise<Exercise> {
-  const response = await apiClient.get(`/exercises/${exerciseId}`);
-  return response.data;
-}
-
-/**
- * Submit an exercise solution
- */
-export async function submitExercise(
-  exerciseId: number,
-  data: SubmitExerciseData
-): Promise<ExerciseSubmission> {
-  const response = await apiClient.post(`/exercises/${exerciseId}/submit`, data);
-  return response.data;
-}
-
-/**
- * Update submission result after validation
- */
-export async function updateSubmissionResult(
-  exerciseId: number,
-  submissionId: number,
-  data: UpdateSubmissionData
-): Promise<ExerciseSubmission> {
-  const response = await apiClient.put(
-    `/exercises/${exerciseId}/submit/${submissionId}`,
-    null,
-    {
-      params: {
-        status: data.status,
-        output: data.output,
-        execution_time_ms: data.executionTimeMs
-      }
-    }
-  );
-  return response.data;
-}
-
-/**
- * Get hints for an exercise
- */
-export async function getExerciseHints(
-  exerciseId: number,
-  hintLevel: number = 1
-): Promise<{
-  exerciseId: number;
-  hintLevel: number;
-  hints: string[];
-  totalHints: number;
-}> {
-  const response = await apiClient.get(`/exercises/${exerciseId}/hints`, {
-    params: { hint_level: hintLevel }
-  });
-  return response.data;
-}
-
-/**
- * Get user's submissions for an exercise
- */
-export async function getUserSubmissions(
-  exerciseId: number
-): Promise<ExerciseSubmission[]> {
-  const response = await apiClient.get(`/exercises/${exerciseId}/submissions`);
-  return response.data;
-}
-
-/**
- * Track hint usage for an exercise
- */
-export async function trackHintUsage(exerciseId: number, hintLevel: number): Promise<void> {
+export async function getExerciseById(exerciseId: string): Promise<Exercise> {
   try {
-    await apiClient.post(`/exercises/${exerciseId}/hints/track`, {
-      exercise_id: exerciseId,
-      hint_level: hintLevel
-    });
+    return await apiClient.get<Exercise>(`/api/exercises/${exerciseId}`);
   } catch (error) {
-    console.error('Error tracking hint usage:', error);
-    // Don't throw - hint tracking is not critical
+    console.error(`Error fetching exercise ${exerciseId}:`, error);
+    throw new Error(
+      error instanceof Error 
+        ? error.message 
+        : `Failed to fetch exercise ${exerciseId}`
+    );
+  }
+}
+
+/**
+ * Get all exercises for a specific lesson
+ * 
+ * @param lessonId - ID of the lesson to fetch exercises for
+ * @returns Promise<Exercise[]> Array of exercises for the lesson
+ * @throws Error if the API request fails
+ */
+export async function getExercisesByLesson(lessonId: string): Promise<Exercise[]> {
+  try {
+    return await apiClient.get<Exercise[]>(`/api/exercises/lesson/${lessonId}`);
+  } catch (error) {
+    console.error(`Error fetching exercises for lesson ${lessonId}:`, error);
+    throw new Error(
+      error instanceof Error 
+        ? error.message 
+        : `Failed to fetch exercises for lesson ${lessonId}`
+    );
   }
 }

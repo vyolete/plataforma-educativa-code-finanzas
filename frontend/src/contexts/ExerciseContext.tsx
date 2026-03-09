@@ -1,7 +1,7 @@
 'use client';
 
 import { createContext, useContext, useState, ReactNode } from 'react';
-import type { Exercise } from '@/data/exercises';
+import type { Exercise } from '@/lib/api/exercises';
 
 interface ExerciseContextType {
   selectedExercise: Exercise | null;

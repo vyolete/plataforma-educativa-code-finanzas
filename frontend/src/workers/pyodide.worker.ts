@@ -10,6 +10,7 @@
  * - Configures matplotlib for base64 image output
  * - Captures stdout, stderr, and matplotlib plots
  * - Handles code execution with error handling
+ * - 30-second execution timeout to prevent infinite loops
  */
 
 // Type definitions for messages
@@ -37,6 +38,9 @@ interface ExecutionResult {
 let pyodide: any = null;
 let pyodideReady = false;
 let loadingPromise: Promise<void> | null = null;
+
+// Execution timeout constant (30 seconds)
+const EXECUTION_TIMEOUT = 30000;
 
 /**
  * Load Pyodide and required packages
@@ -84,74 +88,104 @@ async function loadPyodide(): Promise<void> {
 }
 
 /**
- * Execute Python code and capture output
+ * Execute Python code and capture output with timeout protection
  */
 async function executeCode(code: string): Promise<ExecutionResult> {
   if (!pyodide || !pyodideReady) {
     throw new Error('Pyodide not ready');
   }
   
-  try {
-    // Reset stdout to capture new output
-    await pyodide.runPythonAsync(`
-      import sys
-      from io import StringIO
-      sys.stdout = StringIO()
-      sys.stderr = StringIO()
-    `);
-    
-    // Execute user code
-    const result = await pyodide.runPythonAsync(code);
-    
-    // Get stdout output
-    const stdout = await pyodide.runPythonAsync(`
-      sys.stdout.getvalue()
-    `);
-    
-    // Get stderr output
-    const stderr = await pyodide.runPythonAsync(`
-      sys.stderr.getvalue()
-    `);
-    
-    // Capture matplotlib plots as base64 images
-    const plots = await pyodide.runPythonAsync(`
-      import matplotlib.pyplot as plt
-      import io
-      import base64
-      
-      figures = []
-      for i in plt.get_fignums():
-          fig = plt.figure(i)
-          buf = io.BytesIO()
-          fig.savefig(buf, format='png', bbox_inches='tight', dpi=100)
-          buf.seek(0)
-          img_str = base64.b64encode(buf.read()).decode()
-          figures.append(img_str)
-          plt.close(fig)
-      
-      figures
-    `);
-    
-    // Combine stdout and stderr
-    const output = stdout + (stderr ? '\n' + stderr : '');
-    
-    return {
-      output: output,
-      value: result,
-      plots: plots.toJs ? plots.toJs() : [],
-      error: null
-    };
-  } catch (error: any) {
-    // Get any stderr output that might have been captured before the error
-    let stderr = '';
+  // Create timeout promise
+  const timeoutPromise = new Promise<ExecutionResult>((_, reject) => {
+    setTimeout(() => {
+      reject(new Error('Execution timeout: Code took longer than 30 seconds. Please check for infinite loops or optimize your code.'));
+    }, EXECUTION_TIMEOUT);
+  });
+  
+  // Create execution promise
+  const executionPromise = (async (): Promise<ExecutionResult> => {
     try {
-      stderr = await pyodide.runPythonAsync(`sys.stderr.getvalue()`);
+      // Reset stdout to capture new output
+      await pyodide.runPythonAsync(`
+        import sys
+        from io import StringIO
+        sys.stdout = StringIO()
+        sys.stderr = StringIO()
+      `);
+      
+      // Execute user code
+      const result = await pyodide.runPythonAsync(code);
+      
+      // Get stdout output
+      const stdout = await pyodide.runPythonAsync(`
+        sys.stdout.getvalue()
+      `);
+      
+      // Get stderr output
+      const stderr = await pyodide.runPythonAsync(`
+        sys.stderr.getvalue()
+      `);
+      
+      // Capture matplotlib plots as base64 images
+      const plots = await pyodide.runPythonAsync(`
+        import matplotlib.pyplot as plt
+        import io
+        import base64
+        
+        figures = []
+        for i in plt.get_fignums():
+            fig = plt.figure(i)
+            buf = io.BytesIO()
+            fig.savefig(buf, format='png', bbox_inches='tight', dpi=100)
+            buf.seek(0)
+            img_str = base64.b64encode(buf.read()).decode()
+            figures.append(img_str)
+            plt.close(fig)
+        
+        figures
+      `);
+      
+      // Combine stdout and stderr
+      const output = stdout + (stderr ? '\n' + stderr : '');
+      
+      return {
+        output: output,
+        value: result,
+        plots: plots.toJs ? plots.toJs() : [],
+        error: null
+      };
+    } catch (error: any) {
+      // Get any stderr output that might have been captured before the error
+      let stderr = '';
+      try {
+        stderr = await pyodide.runPythonAsync(`sys.stderr.getvalue()`);
+      } catch (e) {
+        // Ignore if we can't get stderr
+      }
+      
+      return {
+        output: stderr,
+        value: null,
+        plots: [],
+        error: error.message || String(error)
+      };
+    }
+  })();
+  
+  // Race between execution and timeout
+  try {
+    return await Promise.race([executionPromise, timeoutPromise]);
+  } catch (error: any) {
+    // If timeout occurred, try to interrupt Python execution
+    try {
+      // Attempt to interrupt by running a simple command
+      await pyodide.runPythonAsync('pass');
     } catch (e) {
-      // Ignore if we can't get stderr
+      // Ignore interruption errors
     }
     
     return {
-      output: stderr,
+      output: '',
       value: null,
       plots: [],
       error: error.message || String(error)

@@ -1,7 +1,7 @@
 'use client';
 
-import { useMemo, useState } from 'react';
-import { getExercisesByModule } from '@/data/exercises';
+import { useMemo, useState, useEffect } from 'react';
+import { getExercisesByModule, type Exercise } from '@/lib/api/exercises';
 import { useExercise } from '@/contexts/ExerciseContext';
 import ExerciseView from './ExerciseView';
 
@@ -16,10 +16,32 @@ export default function ExercisesPanel({ moduleId = '1' }: ExercisesPanelProps) 
     isExerciseComplete 
   } = useExercise();
   const [showExerciseView, setShowExerciseView] = useState(false);
+  const [exercises, setExercises] = useState<Exercise[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  // Get exercises for the current module
-  const exercises = useMemo(() => {
-    return getExercisesByModule(moduleId);
+  // Fetch exercises for the current module
+  useEffect(() => {
+    const fetchExercises = async () => {
+      setIsLoading(true);
+      setError(null);
+      try {
+        // TODO: Uncomment when API is ready
+        // const data = await getExercisesByModule(moduleId);
+        // setExercises(data);
+        
+        // Temporary: Use empty array until API is connected
+        setExercises([]);
+      } catch (err) {
+        console.error('Error loading exercises:', err);
+        setError('Error al cargar los ejercicios');
+        setExercises([]);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchExercises();
   }, [moduleId]);
 
   // Calculate completion stats
@@ -115,7 +137,22 @@ export default function ExercisesPanel({ moduleId = '1' }: ExercisesPanelProps) 
 
       {/* Exercises List */}
       <div className="flex-1 overflow-y-auto p-3">
-        {exercises.length === 0 ? (
+        {isLoading ? (
+          <div className="text-center py-8 text-gray-400">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-400 mx-auto mb-2"></div>
+            <p className="text-sm">Cargando ejercicios...</p>
+          </div>
+        ) : error ? (
+          <div className="text-center py-8 text-red-400">
+            <p className="text-sm">{error}</p>
+            <button 
+              onClick={() => window.location.reload()}
+              className="text-xs mt-2 text-blue-400 hover:text-blue-300"
+            >
+              Reintentar
+            </button>
+          </div>
+        ) : exercises.length === 0 ? (
           <div className="text-center py-8 text-gray-400">
             <p className="text-sm">No hay ejercicios disponibles</p>
             <p className="text-xs mt-1">para este módulo</p>
