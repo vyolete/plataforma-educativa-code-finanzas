@@ -209,7 +209,7 @@ export default function TeamPage() {
                   </p>
                 </div>
                 <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">
-                  {myTeam.memberCount} / 4 members
+                  {myTeam.memberCount ?? 0} / 4 members
                 </span>
               </div>
 
@@ -243,7 +243,7 @@ export default function TeamPage() {
             <div className="bg-white rounded-lg shadow p-6">
               <div className="flex justify-between items-center mb-4">
                 <h3 className="text-xl font-semibold text-gray-900">Team Members</h3>
-                {isLeader && myTeam.memberCount < 4 && (
+                {isLeader && (myTeam.memberCount ?? 0) < 4 && (
                   <button
                     onClick={() => setShowInviteForm(!showInviteForm)}
                     className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
@@ -307,7 +307,7 @@ export default function TeamPage() {
                 ))}
               </div>
 
-              {myTeam.memberCount < 2 && (
+              {(myTeam.memberCount ?? 0) < 2 && (
                 <div className="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg text-yellow-800 text-sm">
                   ⚠️ Teams must have at least 2 members to submit projects
                 </div>
@@ -383,10 +383,10 @@ export default function TeamPage() {
                       <div>
                         <p className="font-medium text-gray-900">{team.name}</p>
                         <p className="text-sm text-gray-500">
-                          {team.memberCount} / 4 members
+                          {team.memberCount ?? 0} / 4 members
                         </p>
                       </div>
-                      {team.memberCount < 4 ? (
+                      {(team.memberCount ?? 0) < 4 ? (
                         <button
                           onClick={() => handleJoinTeam(team.id)}
                           disabled={submitting}
